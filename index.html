@@ -3,776 +3,1401 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diritto Privato dei Mercati Digitali — Studio</title>
+<title>Diritto Privato dei Mercati Digitali</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
 
-  :root {
-    --bg: #0f0e0c;
-    --surface: #1a1814;
-    --border: #2e2b25;
-    --border-light: #3d3930;
-    --text: #e8e0d0;
-    --muted: #8a8070;
-    --accent-def: #4a90d9;
-    --accent-arg: #c9963a;
-    --accent-caso: #5aaa7a;
-    --accent-def-bg: rgba(74,144,217,0.08);
-    --accent-arg-bg: rgba(201,150,58,0.08);
-    --accent-caso-bg: rgba(90,170,122,0.08);
-    --cap-colors: #c87d3a, #7b9fd4, #9b77c4, #5aaa7a, #d46b6b, #c9963a, #4a90d9;
-  }
+:root {
+  --bg: #0f0e0c;
+  --surface: #181612;
+  --surface2: #201e1a;
+  --border: #2a2722;
+  --border-light: #38342e;
+  --text: #e8e0d0;
+  --muted: #7a7060;
+  --faint: #3a3630;
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  --def: #4a90d9;
+  --def-bg: rgba(74,144,217,0.07);
+  --def-line: rgba(74,144,217,0.3);
+  --def-phrase: rgba(74,144,217,0.13);
+  --def-phrase-text: #a0c4ea;
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+  --arg: #c9963a;
+  --arg-bg: rgba(201,150,58,0.07);
+  --arg-line: rgba(201,150,58,0.3);
+  --arg-phrase: rgba(201,150,58,0.13);
+  --arg-phrase-text: #d4b06e;
 
-  /* HEADER */
-  header {
-    padding: 48px 40px 32px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: rgba(15,14,12,0.95);
-    backdrop-filter: blur(12px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
+  --caso: #5aaa7a;
+  --caso-bg: rgba(90,170,122,0.07);
+  --caso-line: rgba(90,170,122,0.3);
+  --caso-phrase: rgba(90,170,122,0.13);
+  --caso-phrase-text: #8ecfa8;
+}
 
-  .header-left h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    color: var(--text);
-  }
-  .header-left p {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.5px;
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .header-controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
 
-  .btn {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 1px solid var(--border-light);
-    background: var(--surface);
-    color: var(--text);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-  .btn:hover { border-color: var(--muted); background: var(--border); }
-  .btn.active { background: var(--accent-arg); color: #0f0e0c; border-color: var(--accent-arg); font-weight: 600; }
+/* HEADER */
+header {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(15,14,12,0.97);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.hl h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 700;
+  letter-spacing: -0.2px; color: var(--text);
+}
+.hl p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  margin-top: 3px; letter-spacing: 0.8px;
+}
+.hc { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-  .search-wrap {
-    position: relative;
-  }
-  .search-wrap input {
-    background: var(--surface);
-    border: 1px solid var(--border-light);
-    border-radius: 4px;
-    color: var(--text);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 8px 12px;
-    width: 200px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .search-wrap input::placeholder { color: var(--muted); }
-  .search-wrap input:focus { border-color: var(--muted); }
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.4px;
+  padding: 7px 14px; border-radius: 3px;
+  border: 1px solid var(--border-light);
+  background: var(--surface2); color: var(--text);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.btn:hover { border-color: var(--muted); }
+.btn.on { background: var(--arg); color: #0f0e0c; border-color: var(--arg); font-weight: 600; }
 
-  /* LEGEND */
-  .legend {
-    display: flex;
-    gap: 20px;
-    padding: 12px 40px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-  }
-  .legend-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
+input.search {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  padding: 7px 12px; border-radius: 3px;
+  border: 1px solid var(--border-light);
+  background: var(--surface2); color: var(--text);
+  outline: none; width: 190px; letter-spacing: 0.3px;
+  transition: border-color 0.15s;
+}
+input.search::placeholder { color: var(--muted); }
+input.search:focus { border-color: var(--muted); }
 
-  /* MAIN */
-  main { padding: 0 40px 80px; max-width: 1100px; margin: 0 auto; }
+/* LEGEND */
+.legend {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 40px;
+  display: flex; gap: 24px; align-items: center;
+}
+.leg {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.5px; color: var(--muted);
+}
+.ld { width: 8px; height: 8px; border-radius: 50%; }
+.leg-note { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--faint); letter-spacing: 0.3px; }
 
-  /* CHAPTER */
-  .chapter {
-    margin-top: 40px;
-  }
+/* STATS */
+.stats {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 7px 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  display: flex; gap: 20px; letter-spacing: 0.4px;
+}
+.stats span { color: var(--text); }
 
-  .chapter-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 0 12px;
-    border-bottom: 2px solid var(--border);
-    cursor: pointer;
-    user-select: none;
-  }
-  .chapter-header:hover .chapter-title { opacity: 0.8; }
+/* MAIN */
+main { max-width: 980px; margin: 0 auto; padding: 0 40px 80px; }
 
-  .chapter-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    min-width: 60px;
-  }
-  .chapter-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    flex: 1;
-    transition: opacity 0.15s;
-  }
-  .chapter-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 10px;
-    border: 1px solid currentColor;
-    opacity: 0.6;
-    color: var(--muted);
-  }
-  .chapter-toggle {
-    font-size: 16px;
-    color: var(--muted);
-    transition: transform 0.2s;
-  }
-  .chapter.collapsed .chapter-toggle { transform: rotate(-90deg); }
-  .chapter.collapsed .questions-grid { display: none; }
+/* CHAPTER */
+.chapter { margin-top: 44px; }
+.ch-header {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border-light);
+  cursor: pointer; user-select: none;
+}
+.ch-header:hover .ch-title { opacity: 0.75; }
+.ch-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; min-width: 60px; }
+.ch-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 600; flex: 1; transition: opacity 0.15s; }
+.ch-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+.ch-arr { color: var(--muted); font-size: 13px; transition: transform 0.2s; }
+.chapter.collapsed .ch-arr { transform: rotate(-90deg); }
+.chapter.collapsed .ch-body { display: none; }
 
-  /* QUESTIONS GRID */
-  .questions-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding-top: 16px;
-  }
+.ch-body { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; }
 
-  /* QUESTION CARD */
-  .q-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-  .q-card:hover { border-color: var(--border-light); }
-  .q-card.hidden { display: none; }
+/* CHAPTER COLORS */
+.chapter[data-c="1"] .ch-title { color: #c87d3a; }
+.chapter[data-c="2"] .ch-title { color: #7b9fd4; }
+.chapter[data-c="3"] .ch-title { color: #9b77c4; }
+.chapter[data-c="4"] .ch-title { color: #5aaa7a; }
+.chapter[data-c="5"] .ch-title { color: #d46b6b; }
+.chapter[data-c="6"] .ch-title { color: #c9963a; }
+.chapter[data-c="7"] .ch-title { color: #4a90d9; }
 
-  .q-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--border);
-  }
-  .q-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    min-width: 28px;
-    padding-top: 2px;
-    letter-spacing: 0.5px;
-  }
-  .q-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 14px;
-    flex: 1;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.4;
-  }
-  .q-chevron {
-    color: var(--muted);
-    font-size: 12px;
-    padding-top: 3px;
-    transition: transform 0.15s;
-  }
-  .q-card.open .q-chevron { transform: rotate(90deg); }
+/* QUESTION CARD */
+.q-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px; overflow: hidden;
+  transition: border-color 0.15s;
+}
+.q-card:hover { border-color: var(--border-light); }
+.q-card.hidden { display: none; }
 
-  /* KEYWORD BLOCKS */
-  .q-keywords {
-    display: none;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-  }
-  .q-card.open .q-keywords { display: grid; }
+.q-head {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 12px 16px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.1s;
+}
+.q-head:hover { background: rgba(255,255,255,0.02); }
+.q-card.open .q-head { border-bottom-color: var(--border); }
+.q-n { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); min-width: 26px; }
+.q-t { font-family: 'Source Serif 4', serif; font-size: 14px; font-style: italic; flex: 1; color: var(--text); line-height: 1.4; }
+.q-arr { color: var(--muted); font-size: 11px; transition: transform 0.15s; }
+.q-card.open .q-arr { transform: rotate(90deg); }
 
-  .kw-block {
-    padding: 12px 16px;
-    border-right: 1px solid var(--border);
-    position: relative;
-  }
-  .kw-block:last-child { border-right: none; }
+/* BODY */
+.q-body { display: none; }
+.q-card.open .q-body { display: grid; grid-template-columns: 1fr 1fr 1fr; }
 
-  .kw-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    display: block;
-    text-transform: uppercase;
-  }
+/* BLOCK */
+.block {
+  padding: 14px 16px;
+  border-right: 1px solid var(--border);
+}
+.block:last-child { border-right: none; }
 
-  .kw-block.def { background: var(--accent-def-bg); }
-  .kw-block.def .kw-label { color: var(--accent-def); }
+.block.def { background: var(--def-bg); border-top: 2px solid var(--def-line); }
+.block.arg { background: var(--arg-bg); border-top: 2px solid var(--arg-line); }
+.block.caso { background: var(--caso-bg); border-top: 2px solid var(--caso-line); }
 
-  .kw-block.arg { background: var(--accent-arg-bg); }
-  .kw-block.arg .kw-label { color: var(--accent-arg); }
+.block-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  font-weight: 500; text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.block.def .block-label { color: var(--def); }
+.block.arg .block-label { color: var(--arg); }
+.block.caso .block-label { color: var(--caso); }
 
-  .kw-block.caso { background: var(--accent-caso-bg); }
-  .kw-block.caso .kw-label { color: var(--accent-caso); }
+/* PHRASES */
+.phrases { display: flex; flex-direction: column; gap: 5px; }
 
-  .kw-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
+.phrase {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px; line-height: 1.5;
+  padding: 5px 9px;
+  border-radius: 3px;
+  position: relative;
+}
 
-  .kw-tag {
-    font-size: 11px;
-    line-height: 1.3;
-    padding: 3px 7px;
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
+.block.def .phrase { background: var(--def-phrase); color: var(--def-phrase-text); }
+.block.arg .phrase { background: var(--arg-phrase); color: var(--arg-phrase-text); }
+.block.caso .phrase { background: var(--caso-phrase); color: var(--caso-phrase-text); }
 
-  .kw-block.def .kw-tag {
-    background: rgba(74,144,217,0.12);
-    color: #85b8e8;
-    border: 1px solid rgba(74,144,217,0.2);
-  }
-  .kw-block.arg .kw-tag {
-    background: rgba(201,150,58,0.12);
-    color: #d4ac6e;
-    border: 1px solid rgba(201,150,58,0.2);
-  }
-  .kw-block.caso .kw-tag {
-    background: rgba(90,170,122,0.12);
-    color: #7bc49a;
-    border: 1px solid rgba(90,170,122,0.2);
-  }
+/* HIDDEN mode */
+body.hide-mode .phrase {
+  background: var(--faint) !important;
+  color: var(--faint) !important;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+}
+body.hide-mode .phrase.shown {
+  background: initial !important;
+  color: initial !important;
+}
+body.hide-mode .block.def .phrase.shown { background: var(--def-phrase) !important; color: var(--def-phrase-text) !important; }
+body.hide-mode .block.arg .phrase.shown { background: var(--arg-phrase) !important; color: var(--arg-phrase-text) !important; }
+body.hide-mode .block.caso .phrase.shown { background: var(--caso-phrase) !important; color: var(--caso-phrase-text) !important; }
 
-  /* SELF-TEST MODE */
-  body.test-mode .kw-tag {
-    background: var(--border) !important;
-    color: var(--border) !important;
-    border-color: var(--border) !important;
-    cursor: pointer;
-    user-select: none;
-  }
-  body.test-mode .kw-tag.revealed {
-    background: initial !important;
-    color: initial !important;
-    border-color: initial !important;
-  }
-  body.test-mode .kw-block.def .kw-tag.revealed {
-    background: rgba(74,144,217,0.12) !important;
-    color: #85b8e8 !important;
-    border: 1px solid rgba(74,144,217,0.2) !important;
-  }
-  body.test-mode .kw-block.arg .kw-tag.revealed {
-    background: rgba(201,150,58,0.12) !important;
-    color: #d4ac6e !important;
-    border: 1px solid rgba(201,150,58,0.2) !important;
-  }
-  body.test-mode .kw-block.caso .kw-tag.revealed {
-    background: rgba(90,170,122,0.12) !important;
-    color: #7bc49a !important;
-    border: 1px solid rgba(90,170,122,0.2) !important;
-  }
+/* PROGRESS */
+.progress-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 2px; background: var(--border); z-index: 200; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--def), var(--caso)); width: 0%; transition: width 0.3s; }
 
-  /* PROGRESS */
-  .progress-bar {
-    height: 2px;
-    background: var(--border);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-arg), var(--accent-caso));
-    width: 0%;
-    transition: width 0.3s;
-  }
-
-  /* STATS BAR */
-  .stats {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    padding: 8px 40px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 20px;
-    letter-spacing: 0.5px;
-  }
-  .stats span { color: var(--text); }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    header { padding: 24px 20px; flex-wrap: wrap; }
-    main { padding: 0 20px 80px; }
-    .legend { padding: 10px 20px; flex-wrap: wrap; gap: 12px; }
-    .stats { padding: 8px 20px; }
-    .q-keywords { grid-template-columns: 1fr; }
-    .kw-block { border-right: none; border-bottom: 1px solid var(--border); }
-    .kw-block:last-child { border-bottom: none; }
-    .search-wrap input { width: 140px; }
-  }
-
-  /* CHAPTER COLOR ACCENTS */
-  .chapter[data-cap="1"] .chapter-title { color: #c87d3a; }
-  .chapter[data-cap="2"] .chapter-title { color: #7b9fd4; }
-  .chapter[data-cap="3"] .chapter-title { color: #9b77c4; }
-  .chapter[data-cap="4"] .chapter-title { color: #5aaa7a; }
-  .chapter[data-cap="5"] .chapter-title { color: #d46b6b; }
-  .chapter[data-cap="6"] .chapter-title { color: #c9963a; }
-  .chapter[data-cap="7"] .chapter-title { color: #4a90d9; }
+/* RESPONSIVE */
+@media (max-width: 800px) {
+  header { padding: 18px 20px; flex-wrap: wrap; }
+  main { padding: 0 20px 80px; }
+  .legend, .stats { padding-left: 20px; padding-right: 20px; }
+  .q-body { grid-template-columns: 1fr; }
+  .block { border-right: none; border-bottom: 1px solid var(--border); }
+  .block:last-child { border-bottom: none; }
+  input.search { width: 130px; }
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-left">
+  <div class="hl">
     <h1>Diritto Privato dei Mercati Digitali</h1>
-    <p>66 DOMANDE · PAROLE CHIAVE · CASI GIUDIZIARI</p>
+    <p>66 DOMANDE · FRASI CHIAVE · CASI GIUDIZIARI</p>
   </div>
-  <div class="header-controls">
-    <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="Cerca domanda o caso…">
-    </div>
+  <div class="hc">
+    <input type="text" class="search" id="searchInput" placeholder="Cerca domanda o caso…">
     <button class="btn" id="expandAll">ESPANDI TUTTO</button>
     <button class="btn" id="collapseAll">CHIUDI TUTTO</button>
-    <button class="btn" id="testMode">🎯 SELF-TEST</button>
+    <button class="btn" id="hideMode">🙈 NASCONDI FRASI</button>
   </div>
 </header>
 
 <div class="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#4a90d9"></div>DEFINIZIONE</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#c9963a"></div>ARGOMENTAZIONE</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#5aaa7a"></div>CASO GIUDIZIARIO</div>
-  <div class="legend-item" style="margin-left:auto; color:#5a5248; font-size:10px; font-family:'JetBrains Mono',monospace;">In self-test: clicca ogni parola per rivelare</div>
+  <div class="leg"><div class="ld" style="background:var(--def)"></div>DEFINIZIONE</div>
+  <div class="leg"><div class="ld" style="background:var(--arg)"></div>ARGOMENTAZIONE</div>
+  <div class="leg"><div class="ld" style="background:var(--caso)"></div>CASO</div>
+  <div class="leg-note">Modalità nascondi: clicca ogni frase per rivelarla · le frasi sono quelle che non possono mancare in una risposta da 9/10</div>
 </div>
 
 <div class="stats">
   <div>DOMANDE VISIBILI: <span id="visibleCount">66</span></div>
-  <div>CAPITOLI: <span>7</span></div>
-  <div id="testStats" style="display:none">RIVELATE: <span id="revealedCount">0</span> / <span id="totalTags">0</span></div>
+  <div id="hideStats" style="display:none">RIVELATE: <span id="revealedCount">0</span> / <span id="totalPhrases">0</span></div>
 </div>
 
 <main id="mainContent"></main>
-
 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
 <script>
 const DATA = [
-  {cap:1, title:"Il Contesto", questions:[
-    {n:1, t:"Digitalizzazione vs datizzazione — Caso Google Books",
-      def:["digitalizzazione=analogico→binario","datizzazione=info→dato quantificabile","datizzazione crea materia prima algoritmi"],
-      arg:["file immagine è 'cieco' per computer","datizzazione estrae valore economico","Google Books: OCR trasforma scansioni in testo calcolabile"],
-      caso:["Google Books 2004","fase 1=scansione (digitalizzazione)","fase 2=OCR (datizzazione)","addestramento Google Translate"]},
-    {n:2, t:"Economia dei bit: free, perfect, instant",
-      def:["free=costo marginale zero","perfect=copia identica all'originale","instant=distribuzione globale immediata"],
-      arg:["stravolge modelli basati su scarsità fisica","Kodak/industria discografica travolte","transizione da vendita a servizi streaming"],
-      caso:["Spotify e Netflix come conseguenza","collasso industria discografica analogica","abbondanza vs scarsità artificiale"]},
-    {n:3, t:"Piramide DIKW e Big Data — dalla causalità alla correlazione",
-      def:["DIKW: Data→Information→Knowledge→Wisdom","Big Data=3V: Volume, Velocità, Varietà","Big Data altera i primi gradini della piramide"],
-      arg:["dal nesso causale alla correlazione statistica","algoritmo non cerca 'perché' ma 'quando insieme'","campioni statistici limitati superati dalla totalità dei dati"],
-      caso:["'fine della teoria' (Anderson)","LLM non conoscono grammatica ma predicono probabilità","traduttori automatici superiori a sistemi basati su regole"]},
-    {n:4, t:"Fasi evolutive dell'IA — AI Act (definizione giuridica)",
-      def:["Expert Systems: if-then, rigidi","ML/Reti Neurali: apprende da dati","LLM/IA Generativa: crea nuovi contenuti"],
-      arg:["Expert Systems=incapaci di gestire imprevedibile","ML=pattern recognition, deep learning","LLM=genera autonomamente con rischio allucinazioni"],
-      caso:["AI Act Reg. UE 2024/1689","sistema automatizzato con autonomia variabile","deduce dall'input → genera output che influenzano ambienti"]},
-    {n:5, t:"Blockchain, proof-of-work, Smart Contract, DAO",
-      def:["blockchain=registro distribuito crittografico","proof-of-work=minatori risolvono enigmi matematici","smart contract=codice auto-eseguibile su blockchain","DAO=azienda governata da codice senza organi umani"],
-      arg:["falsificazione=ricalcolare tutta la catena=computazionalmente impossibile","smart contract: se X→automaticamente esegui Y","DAO: regole formalizzate in codice, voto a maggioranza"],
-      caso:["Bitcoin come proof-of-work paradigmatico","NFT su blockchain: 'Everydays' di Beeple 69M$","Christie's: acquirente NFT ≠ proprietario opera"]},
-    {n:6, t:"Mass customization — Industria 4.0 — stampa 3D",
-      def:["Industria 4.0=IoT+Big Data+robotica nel manifatturiero","mass customization=personalizzazione di massa","additive manufacturing=stampa 3D: produzione additiva"],
-      arg:["supera il fordismo: costo identico per 1 o 100k pezzi","elimina magazzini e economie di scala obbligatorie","abilita la coda lunga: nicchie prima non redditizie"],
-      caso:["protesi mediche su misura come esempio paradigmatico","coda lunga (Anderson): mercato delle nicchie","vs produzione sottrattiva fordista-taylorista"]},
-    {n:7, t:"Analisi costi-benefici vs Principio di Precauzione",
-      def:["costi-benefici=utilitarismo: vantaggi>rischi → innovazione lecita","principio di precauzione=rischio grave/irreversibile → agire senza certezza scientifica","approccio USA vs approccio EU"],
-      arg:["USA: brevettabilità biologica se benefici>costi","EU: ragioni etiche e morali prevalgono sul vantaggio economico","Dichiarazione di Rio 1992: fondamento giuridico precauzione"],
-      caso:["Diamond v. Chakrabarty (USA 1980)=microrganismi brevettabili","Brüstle v. Greenpeace (CGUE C-34/10, 2011)=divieto brevetti che implicano distruzione embrioni","ragioni etiche prevalgono sul vantaggio tecnologico"]},
-    {n:8, t:"Innovazione senza permesso (permissionless innovation)",
-      def:["permissionless innovation=favore verso sperimentazione senza autorizzazioni preventive","'placet preventivi'=barriere all'ingresso","rimedi ex post invece di autorizzazioni ex ante"],
-      arg:["contro: autorizzazioni bloccano startup, avvantaggiano incumbent","pro: precauzione riduce rischi irreversibili","rimedi civili ex post: responsabilità, antitrust, contratto"],
-      caso:["Uber e AirBnb: innovazione senza permesso come caso pratico","vs Taxi e Alberghi: richiedevano autorizzazioni preventive","barriere burocratiche come strumento anti-competitivo"]},
-    {n:9, t:"Distruzione Creatrice di Schumpeter — monopolio e innovazione",
-      def:["distruzione creatrice=ondate di innovazione radicale distruggono strutture obsolete","monopolio come motore (non ostacolo) dell'innovazione","impresa dominante=unica con risorse per R&S rischiosa"],
-      arg:["monopolio temporaneo=incentivo ad innovare","curva a U rovesciata=né monopolio assoluto né concorrenza perfetta","investimenti R&S=lunghi, onerosi, aleatori: solo il grande tollera il rischio"],
-      caso:["Copyright Term Extension Act (USA 1998)","Disney prolungò diritti su Topolino di 20 anni lobbying","cattura del regolatore: norma tutela il monopolista non l'innovazione"]},
-    {n:10, t:"Concezione atomistica vs Stato Innovatore — Copyright Term Extension Act",
-      def:["atomistica=innovazione privata, lineare, individuale","Stato Innovatore=innovazione collettiva, cumulativa, fondi pubblici cruciali","ricerca di base=alto rischio → solo lo Stato la finanzia"],
-      arg:["PI troppo estesa frena innovazione cumulativa","conoscenza=bene non rivale: massima diffusione genera benefici sociali","monopoli legali troppo lunghi=appropriazione privata di benefici collettivi"],
-      caso:["Copyright Term Extension Act (USA 1998)","pressioni lobbistiche Disney: Topolino posticipato di 20 anni","estensione retroattiva su opera redditizia=non giustificabile come incentivo futuro"]},
-  ]},
-  {cap:2, title:"Diritto e Mercati Digitali", questions:[
-    {n:11, t:"Regolabilità della rete — Code is Law (Lessig) — DRM",
-      def:["Code is Law (Lessig)=la vera norma del digitale è scritta nel codice software","cyberlibertarianismo anni '90: rete=intrinsecamente non regolabile","DRM=Digital Rights Management: barriere crittografiche ai contenuti"],
-      arg:["evoluzione tecnica: cookie, HTML5, geoblocking → rete identificabile e sorvegliabile","DRM preclude anche usi legalmente leciti (fair use, critica, didattica)","divieto tecnico=si auto-esegue, non può essere violato consapevolmente"],
-      caso:["DRM come esempio emblematico di Code is Law","privati sconfiggono tecnologicamente il diritto statale","ebook DRM: impedisce prestito e rivendita legalmente ammissibili"]},
-    {n:12, t:"Fallimento del mercato — asimmetrie informative — esternalità",
-      def:["fallimento=mercato non alloca risorse efficientemente","asimmetria informativa=venditore sa più del compratore","esternalità=costi/benefici su terzi esclusi dal prezzo"],
-      arg:["piattaforme accumulano Big Data → profilazione → asimmetria abissale","prezzi personalizzati: utente non sa di essere il target","tirannia delle piccole decisioni: Airbnb e danni collettivi alle città"],
-      caso:["Akerlof: mercato dei 'lemons' (1970)","peach=auto buone escono dal mercato perché pagate come lemon","selezione avversa: rimangono solo i bidoni"]},
-    {n:13, t:"Fallimenti dello Stato — Public Choice — cattura del regolatore",
-      def:["Public Choice=anche lo Stato genera inefficienze strutturali","cattura del regolatore (Stigler)=imprese regolate cooptano le agenzie","revolving doors=funzionario→industria→funzionario"],
-      arg:["gap informativo industria-regolatore → vantaggio per il catturatore","lobbying=risorse spese per influenzare anziché produrre","norme approvate in nome della protezione pubblica → barriere all'ingresso per i nuovi entranti"],
-      caso:["lobby tassisti/albergatori contro Uber e Airbnb","obblighi anacronistici come strumento per bloccare concorrenti","ostracismo a piattaforme innovative da parte di categorie preesistenti"]},
-    {n:14, t:"Dilemma di Collingridge — normazione sperimentale — co-regolazione",
-      def:["Dilemma Collingridge=regoli presto → errori; aspetti → tecnologia inamovibile","normazione sperimentale=clausole di scadenza + revisione periodica","co-regolazione=Stato fissa obiettivi + expertise privata per applicazione"],
-      arg:["hard law=troppo rigida per tecnologia che evolve rapidamente","neutralità tecnologica=principi generali indipendenti dalla tecnologia specifica","autoregolazione=standard civili flessibili formulati dai destinatari del mercato digitale"],
-      caso:["Dieselgate 2015=paradigma di inadeguatezza normativa","Volkswagen: software riconosce test emissioni e si adatta","controlli fisici tradizionali ciechi davanti alla manipolazione algoritmica"]},
-    {n:15, t:"Fiducia nei mercati digitali — segnali credibili — Lex Mercatoria",
-      def:["segnali credibili=costosi da simulare per chi è scorretto","sistemi reputazionali digitali=feedback peer review generati dagli utenti","Lex Mercatoria=diritto spontaneo dei mercanti senza Stato garante"],
-      arg:["e-commerce=stranieri anonimi a distanza oceanica","segnale credibile: garanzia costosa = insostenibile per venditore disonesto","stigma reputazionale=cattiva nomea come 'seconda mano invisibile'"],
-      caso:["Lega dei Mercanti Magrebini del Mediterraneo medievale","parallelo con rating eBay/Airbnb/Booking","chi tradisce viene isolato dal circuito commerciale"]},
-    {n:16, t:"Costi di transazione di Coase — disintegrazione verticale — crowdsourcing",
-      def:["costi di transazione (Coase)=negoziazione+stipula+monitoraggio+enforcement","make vs buy: integrazione verticale vs esternalizzazione","disintegrazione verticale=digitale abbatte costi → buy più conveniente"],
-      arg:["modello '900: impresa integrata per controllare dipendenti","digitale: comunicazione a distanza a costo zero → outsourcing sistematico","crowdsourcing=folla disaggregata globale risolve compiti aziendali"],
-      caso:["Amazon Mechanical Turk=crowdsourcing elementare","Waze=wisdom of the crowd applicata alla mobilità","sistemi ibridi: mercato+impresa+piattaforma"]},
-    {n:17, t:"Commons based peer production — motivazioni intrinseche — crowding out",
-      def:["CBPP (Benkler)=produzione collaborativa volontaria in regime di accesso aperto","motivazioni intrinseche=sfida intellettuale, piacere, reputazione sociale","crowding out=incentivi monetari distruggono la cooperazione genuina"],
-      arg:["sfida ai dogmi: conoscenza prodotta meglio fuori dal mercato e dai prezzi","modularità+granularità: requisiti tecnici che abilitano il contributo minimo","inserire denaro in CBPP è letale: corrompe la motivazione estrinsecamente"],
-      caso:["Wikipedia=enciclopedia senza direzione editoriale centrale","Linux=sistema operativo open source costruito dalla community","entrambi: autoselezione dei compiti superiore all'assegnazione gerarchica"]},
-  ]},
-  {cap:3, title:"Piattaforme, Concorrenza e Mercati", questions:[
-    {n:18, t:"Mercati bilaterali — dilemma dell'uovo e della gallina — legge dell'unico prezzo",
-      def:["mercato bilaterale=piattaforma intermedia tra due gruppi interdipendenti","dilemma uovo/gallina=chi attiri prima senza l'altro?","legge dell'unico prezzo/beni complementari=abbatti prezzo complementare → esplode domanda primario"],
-      arg:["flessibilità domanda: chi è meno disposto a rinunciare al servizio?","switching costs: costi artificialmente elevati per bloccare l'utente","ecosistema integrato: multihoming difficile → lock-in strutturale"],
-      caso:["Google: Android gratuito agli sviluppatori → miliardi smartphone → introiti pubblicitari","Apple iOS: ecosistema integrato per massimizzare switching costs","piattaforme: sussidiano un lato per far esplodere l'altro"]},
-    {n:19, t:"Esternalità di rete — rendimenti di scala — lock-in — winner takes all",
-      def:["esternalità di rete=utilità cresce esponenzialmente con numero di utenti","rendimenti di scala=costi fissi altissimi, costo marginale zero","lock-in=switching costs elevati artificialmente","winner takes all=monopolizzazione naturale dei mercati digitali"],
-      arg:["esternalità di rete incrociate=crescita un lato→beneficio lato opposto","accumulo dati → algoritmo migliore → vantaggio incolmabile per i concorrenti","multihoming difficile → utente bloccato nella piattaforma dominante"],
-      caso:["Facebook: ogni nuovo utente aumenta utilità per tutti gli altri","Google Search: più query → algoritmo migliore → più query","Amazon: più venditori → più compratori → più venditori"]},
-    {n:20, t:"Lavoro nella Gig Economy — Caso Foodora — Direttiva 2024/2831",
-      def:["Gig Economy=lavoro a chiamata tramite app, classificazione incerta","rider=formalmente autonomo, sostanzialmente etero-organizzato","Direttiva 2024/2831=primato dei fatti + presunzione relativa di subordinazione"],
-      arg:["piattaforma fissa tariffe+itinerari+valutazione→influenza decisiva","'tertium genus': rifiutato dalla Cassazione italiana","presunzione=onere della prova sposta sulla piattaforma di dimostrare l'autonomia"],
-      caso:["Cassazione n. 1663/2020 Caso Foodora","art. 2 d.lgs. 81/2015: collaborazioni etero-organizzate=disciplina del lavoro subordinato","Corte: 'norma di disciplina'=se piattaforma decide tempi+modalità → tutele del dipendente"]},
-    {n:21, t:"Il soggetto che eroga il 'servizio sottostante' — Uber Spain / Airbnb Ireland",
-      def:["servizio sottostante=prestazione materiale (trasporto/alloggio) intermediata","SSI=semplice intermediario digitale senza influenza sulla prestazione","criterio discriminante=influenza decisiva sulle condizioni della prestazione"],
-      arg:["Commissione 356/2016: chi fissa il prezzo finale? chi dà istruzioni vincolanti? chi detiene i beni essenziali?","SSI → d.lgs. 70/2003 (e-commerce)","servizio sottostante → normativa settoriale (licenze taxi, normativa alberghiera)"],
-      caso:["Uber Spain (CGUE C-434/15, 2017): fissa tariffe+controlla driver=servizio di trasporto","Airbnb Ireland (CGUE C-390/18, 2019): non fissa prezzi né regolamenta host=SSI","distinzione vitale per imporre o meno licenze comunali"]},
-    {n:22, t:"Antitrust e dati — fusioni data-driven — Caso Meta (C-252/21)",
-      def:["dati come asset concorrenziale chiave nei mercati digitali","fusioni data-driven=accumulo dati come barriera all'ingresso","antitrust + GDPR=discipline ora intersecate (C-252/21)"],
-      arg:["prima: Google/DoubleClick 2008 autorizzata perché dati limitati","inversione: Bundeskartellamt 2019=raccolta dati Facebook tra app=abuso","CGUE 2023: violazione GDPR = elemento costitutivo dell'abuso di posizione dominante"],
-      caso:["Meta v. Bundeskartellamt (C-252/21, 2023)","raccolta 'dati off' (Instagram, WhatsApp) senza consenso valido","CGUE: chi raccoglie dati in violazione del GDPR non può invocare necessità contrattuale"]},
-    {n:23, t:"Pratiche leganti e self-preferencing — Microsoft / Google Shopping / Enel JuicePass",
-      def:["tying=accesso al servizio principale condizionato all'acquisto del secondario","bundling=pacchettizzazione forzata","self-preferencing=algoritmo privilegia i propri prodotti nelle classifiche"],
-      arg:["sfruttamento del monopolio per colonizzare mercati adiacenti","self-preferencing: risultati di ricerca falsati → concorrenti relegati in fondo","DMA art. 5: obblighi self-executing vietano queste pratiche ai Gatekeeper"],
-      caso:["Microsoft IE+Windows Media Player (1998/2004)=installazione forzata su Windows","Google Shopping (2017)=€2,4Mld multa Commissione","Enel JuicePass/AGCM: Google Maps privilegiato su Android Auto → AGCM sanziona"]},
-    {n:24, t:"Collusione algoritmica — comportamenti paralleli — Tompkins / Eturas",
-      def:["collusione algoritmica=prezzi coordinati algoritmicamente senza accordo esplicito tra umani","comportamenti paralleli=scelte autonome convergenti (leciti)","confine=consapevolezza nell'adottare l'algoritmo come strumento di coordinamento"],
-      arg:["monitoring algorithms: aggiornamento prezzi rivali in tempo reale","signaling algorithms: trasmettono intenzioni di prezzo ai concorrenti","cartello senza riunione fisica → sfida all'antitrust tradizionale"],
-      caso:["US v. Tompkins (2015): venditori poster Amazon usavano stesso algoritmo per prezzi massimi garantiti","Eturas (CGUE C-74/14): software agenzie viaggio con tetto massimo sconti","adozione consapevole dell'algoritmo come presunzione di illecito coordinamento"]},
-    {n:25, t:"Digital Markets Act (DMA) — obblighi del Gatekeeper",
-      def:["DMA Reg. UE 2022/1925=approccio ex ante preventivo","Gatekeeper=fatturato EU>7,5Mld O cap.>75Mld + >45M utenti finali + >10K utenti commerciali per 3 anni","obblighi self-executing (art. 5)=immediati + obblighi generali (art. 6)=specificabili dalla Commissione"],
-      arg:["presunzione relativa quantitativa: superate le soglie → Gatekeeper automatico","art. 5 vieta: clausole MFN, tying, data grabbing tra servizi","art. 6 impone: interoperabilità, accesso dati inserzionisti, portabilità, no self-preferencing"],
-      caso:["designati: Alphabet, Amazon, Meta, Apple, ByteDance, Microsoft","Commissione può imporre: atti delegati + atti esecuzione + sanzioni strutturali","ex ante vs antitrust ex post: non si aspetta il monopolio per intervenire"]},
-    {n:26, t:"Capitalismo della sorveglianza (Zuboff) — Caso Dieselgate",
-      def:["capitalismo della sorveglianza (Zuboff)=surplus comportamentale=dati come materia prima","servizi 'gratis' in cambio di dati comportamentali per prevedere e modificare comportamenti","normative analogiche inadeguate a governare entità digitali 'invisibili'"],
-      arg:["controlli fisici/su prezzi disarmati davanti agli algoritmi","Dieselgate: software manipola sensori fisici → invisibile agli strumenti di controllo tradizionali","Cambridge Analytica: profilazione per alterare preferenze politiche"],
-      caso:["Dieselgate 2015: Volkswagen software riconosce ciclo di prova emissioni","riduce emissioni durante test, le alza nella guida reale","autorità misuravano gas materiale, non potevano rilevare la manipolazione del software"]},
-    {n:27, t:"Monopsonio — Gig Economy e mercato del lavoro",
-      def:["monopsonio=pochi acquirenti, molti venditori (inverso del monopolio)","nella Gig Economy: piattaforma=unico acquirente del lavoro in quella zona geografica","effetto: salari compressi, rischio d'impresa scaricato sui lavoratori"],
-      arg:["rider non ha potere negoziale: prendere o lasciare","piattaforma ha esercito di sostituti disoccupati sempre disponibili","Silicon Valley: patti di non concorrenza inter-aziendali comprimevano mobilità salariale"],
-      caso:["US v. Google/Apple/Intel/Adobe (DOJ 2010): accordi segreti 'no poach'","California vieta patti di non concorrenza → Silicon Valley più dinamica","analogia Gig Economy: monopsonio geografico del delivery"]},
-  ]},
-  {cap:4, title:"I Contratti nei Mercati Digitali", questions:[
-    {n:28, t:"SSI vs Servizio Sottostante — disciplina applicabile",
-      def:["SSI=servizi elettronici a distanza su richiesta=d.lgs. 70/2003","servizio sottostante=prestazione materiale=disciplina settoriale specifica","B2C SSI → anche Codice del Consumo si applica"],
-      arg:["disciplina applicabile dipende dalla classificazione del servizio","SSI B2B tra utenti → Codice Civile","servizio sottostante → normativa del settore (taxi, alberghiero, ecc.)"],
-      caso:["Uber Spain (C-434/15): servizio di trasporto → normativa taxi applicabile","Airbnb Ireland (C-390/18): SSI → non soggetto a normativa alberghiera","stessa piattaforma può erogare sia SSI che servizio sottostante"]},
-    {n:29, t:"Click wrap / Browse wrap — clausole vessatorie — point and click",
-      def:["click wrap=checkbox esplicita di accettazione","browse wrap=accettazione implicita per scorrimento/uso del sito","clausola vessatoria=significativo squilibrio (art. 1341 c.c.) → doppia sottoscrizione specifica"],
-      arg:["doppia sottoscrizione analogica incompatibile con il digitale","click wrap non equivale a firma digitale","clausole approvate con solo click rischiano nullità in sede giudiziale"],
-      caso:["Tribunale di Catanzaro (2012): clausola recesso eBay nulla per mancanza doppia sottoscrizione","giurisprudenza: semplice 'point and click' non identifica con certezza il sottoscrittore","firma digitale qualificata=unico strumento giuridicamente equiparabile alla firma"]},
-    {n:30, t:"Diritto di recesso ad nutum nei contratti digitali — Caso PE Digital",
-      def:["recesso ad nutum (art. 52 ss. Codice del Consumo)=diritto irrinunciabile B2C","14 giorni dalla conclusione del contratto, senza motivazione, senza penali","si applica anche a contratti con dati personali come controprestazione"],
-      arg:["compensa asimmetria informativa nella contrattazione al buio online","omissione informazione sul recesso → termine si estende automaticamente a 12 mesi","servizio 'parzialmente goduto': rimborso proporzionale, non forfettario"],
-      caso:["PE Digital (CGUE C-641/19)","utente recede dopo aver usato il test della personalità online","sito voleva trattenere l'intera somma come 'compensazione'","CGUE: rimborso proporzionale al servizio effettivamente fruito"]},
-    {n:31, t:"Il prosumer — professionista vs consumatore — Caso Kamenova",
-      def:["prosumer=producer+consumer=figura ibrida della piattaforma economy","consumatore → tutele Codice del Consumo","professionista → Codice Civile, nessuna tutela aggiuntiva"],
-      arg:["criteri Commissione: frequenza + volume d'affari + finalità di lucro","classificazione dipende da sistematicità e fine di lucro, non da struttura aziendale formale","Airbnb host, eBay venditore, Kijiji annunci: valutazione caso per caso"],
-      caso:["Kamenova (CGUE C-105/17, 2018)","venditrice di 8 orologi usati pubblicati su web","CGUE: numero di annunci non determina automaticamente lo status professionale","occorre valutare: sistematicità delle vendite, organizzazione, fine di lucro"]},
-    {n:32, t:"Disattivazione dell'account — risoluzione o recesso — Messina vs Catanzaro",
-      def:["risoluzione espressa (art. 1456 c.c.)=inadempimento grave → chiusura immediata","recesso unilaterale (art. 1373 c.c.)=atto potestativo → se clausola vessatoria richiede doppia sottoscrizione","DSA art. 7: obbligo di motivazione per ogni restrizione all'account"],
-      arg:["piattaforme riservano nei ToS potere assoluto di chiusura account","se chiusura immotivata o per inadempimento irrilevante → recesso abusivo","clausola di recesso unilaterale=clausola vessatoria → nullità se non specificamente approvata"],
-      caso:["Tribunale di Messina (2010): eBay chiude account per calo feedback → risoluzione infondata","Tribunale di Catanzaro (2012): stessa fattispecie → recesso unilaterale abusivo","mancanza doppia sottoscrizione della clausola risolutiva → nulla"]},
-    {n:33, t:"Gratuità e onerosità dei contratti digitali — dati come controprestazione — AGCM vs Facebook",
-      def:["modello proprietario=dati come beni commerciabili=vera controprestazione economica","modello personalistico=dati=attributi personalità, non cedibili, consenso=solo autorizzazione revocabile","EDPB: servizio ceduto in cambio di dati=contratto oneroso → Codice del Consumo applicabile"],
-      arg:["'gratis e lo sarà sempre' = pubblicità ingannevole se i dati hanno valore commerciale","dati come corrispettivo → tutele del consumatore si attivano","nuove direttive UE estendono esplicitamente il Codice del Consumo ai contratti con dati"],
-      caso:["AGCM vs Facebook (2018)","AGCM sanziona Facebook per pratica commerciale scorretta","slogan 'È gratis e lo sarà sempre' giudicato ingannevole","dati utenti=corrispettivo economico reale: la gratuità non esiste"]},
-    {n:34, t:"Regolamento P2B — clausole abusive B2B — Data Act",
-      def:["P2B Reg. 2019/1150=Platform to Business: trasparenza e correttezza nei rapporti piattaforma-PMI","obblighi: parametri ranking, preavviso 15gg modifiche, 30gg chiusura account con motivazione","Data Act Reg. 2023/2854: clausole abusive B2B sui dati=presuntivamente non vincolanti"],
-      arg:["PMI accettano ToS 'prendere o lasciare' senza potere negoziale","P2B: ranking trasparente=PMI devono capire come scalare la visibilità","Data Act: novità assoluta=concetto di clausola abusiva introdotto nel B2B digitale"],
-      caso:["Amazon Marketplace: parametri ranking erano segreti → P2B li impone pubblici","Apple App Store come Gatekeeper: commissioni e regole unilaterali","Data Act: clausole che escludono responsabilità piattaforma in caso di inadempimento grave → nulle"]},
-    {n:35, t:"Difetto di conformità materiale e giuridica — beni smart — Direttiva 2019/771",
-      def:["Direttiva 2019/771 (d.lgs. 170/2021)=beni con elementi digitali","difetto conformità materiale=prodotto non funziona come atteso nel tempo → obbligo aggiornamenti","difetto conformità giuridica=software incorporato viola norme UE (es. GDPR)"],
-      arg:["obsolescenza programmata: obbligo legale di aggiornamenti di sicurezza per tutta la vita utile ragionevolmente attesa","assenza aggiornamento = bene difettoso = risoluzione del contratto","smartwatch che trasmette dati sanitari senza consenso = difetto di conformità giuridica"],
-      caso:["esempio paradigmatico: smartwatch con app che raccoglie dati sanitari in violazione del GDPR","acquirente può richiedere: ripristino conformità + riduzione prezzo + risoluzione","normativa allinea la vita digitale del prodotto alla sua vita fisica"]},
-    {n:36, t:"Natura giuridica degli Smart Contract — tesi contrattualista vs non contrattualista",
-      def:["smart contract=accordo codificato su blockchain, auto-eseguibile al verificarsi di condizione oggettiva","tesi non contrattualista=manca volontà: codice alfanumerico senza linguaggio, impossibile rilevare vizi del consenso","tesi contrattualista=volontà si forma 'a monte' nella programmazione del contratto"],
-      arg:["non contrattualista: codice=procedura informatica, non testo, impossibile applicare patologie classiche (dolo, errore, violenza)","contrattualista: analogia vending machine=acquisto cocacola senza trattativa verbale ma contratto si perfeziona lo stesso","automatismo del codice riguarda l'adempimento, non la formazione del consenso"],
-      caso:["analogia delle vending machines: inserisci soldi→ricevi prodotto=contratto automatico","smart contract: accettando l'interfaccia crittografica si forma il consenso 'a monte'","adempimento automatico (trasferimento criptovaluta) è solo esecuzione, non formazione"]},
-    {n:37, t:"Bitcoin moneta ex art. 1278 c.c. — classificazione BCE — diritto di credito",
-      def:["funzioni della moneta: mezzo di scambio + misura di valori + riserva di liquidità","BCE 2015: Bitcoin=rappresentazione digitale di valore, non moneta a corso legale","tesi alternativa: Bitcoin=diritto di credito verso i nodi della rete"],
-      arg:["Bitcoin non emesso da Banca Centrale, valore fluttua in base a mining e speculazione","non è mezzo di pagamento a corso legale: nessun obbligo di accettarlo","tesi servizio telematico: chi possiede Bitcoin è creditore del protocollo, non proprietario di un bene"],
-      caso:["BCE e d.lgs. 90/2017: Bitcoin escluso dalla categoria moneta","qualificato come 'rappresentazione digitale di valore'","classificazione BCE: utility token/investment token/exchange token"]},
-    {n:38, t:"Prezzi personalizzati/dinamici — Direttiva Omnibus",
-      def:["prezzi personalizzati=algoritmo calcola prezzo di riserva specifico per ogni singolo utente","prezzi dinamici=prezzo cambia in tempo reale in base alla domanda aggregata","Direttiva Omnibus 2019/2161: obbligo di disclosure quando il prezzo è personalizzato algoritmicamente"],
-      arg:["machine learning+Big Data: cronologia navigazione+geolocalizzazione+storico acquisti → prezzo su misura","discriminazione di prezzo: legalmente controversa, economicamente efficiente ma eticamente discutibile","Omnibus: omettere 'questo prezzo è personalizzato per te' = pratica commerciale ingannevole"],
-      caso:["Amazon varia prezzi milioni di volte al giorno per categoria e utente","Uber surge pricing: prezzo dinamico esplicito (comunicato)","prezzi personalizzati nascosti: Direttiva Omnibus li obbliga a essere comunicati"]},
-    {n:39, t:"Sharing Economy — condivisione beni materiali — proprietà privata",
-      def:["sharing economy=condivisione temporanea accesso a beni con capacità in eccesso","bene deve essere diffuso (facilmente reperibile) + avere capacità in eccesso","non segna la fine della proprietà: al contrario, la presuppone"],
-      arg:["senza proprietà privata del veicolo o dell'immobile la sharing economy crollerebbe","proprietario cede l'uso temporaneo, non il diritto di proprietà","detentore qualificato: accesso a funzionalità specifiche per tempo limitato"],
-      caso:["BlaBlaCar: proprietario privato del veicolo condivide il tragitto","Airbnb: proprietario dell'immobile affitta temporaneamente","Uber: più complesso perché piattaforma esercita influenza decisiva sulla prestazione"]},
-  ]},
-  {cap:5, title:"La Proprietà nei Mercati Digitali", questions:[
-    {n:40, t:"Beni rivali/non rivali — escludibili/non escludibili — tragedia dei beni comuni",
-      def:["rivale=consumo riduce disponibilità per altri","non rivale=consumo non riduce disponibilità (canzone, file, idea)","escludibile=possibile impedire l'uso | non escludibile=impossibile impedirlo"],
-      arg:["conoscenza=non rivale per natura: milioni possono usarla senza consumarla","PI crea escludibilità artificiale su beni intrinsecamente non rivali","tragedia dei beni comuni=sovrasfruttamento di beni rivali non escludibili (Hardin 1967)"],
-      caso:["Garrett Hardin 1967: tragedia del pascolo comune (rivale+non escludibile)","Wikipedia: immune alla tragedia perché non rivale (miliardi accedono senza consumarla)","brevetti e copyright: escludibilità artificiale = incentivo vs accesso libero alla conoscenza"]},
-    {n:41, t:"Dal Copyright al Copyleft — GPL — Creative Commons",
-      def:["copyright=esclusiva proprietaria, vietata riproduzione/modifica","copyleft=usa il diritto d'autore al contrario per garantire libertà","GPL (Stallman)=clausola virale share-alike | CC (Lessig)=moduli BY/SA/NC/ND"],
-      arg:["GPL: chi modifica deve rilasciare il codice modificato con la stessa licenza","clausola virale: impedisce la privatizzazione delle migliorie","Creative Commons: digital code=metadati inglobati nel file che viaggiano con l'opera"],
-      caso:["Linux: sistema operativo open source GPL, sviluppato dalla community","Wikipedia: licenza CC BY-SA","Lessig risponde all'approccio GPL con licenze più flessibili per opere non software"]},
-    {n:42, t:"Lo 'statuto' del file digitale — contratti di licenza d'uso — Caso 1984 Amazon",
-      def:["acquisto file=contratto di licenza d'uso, non acquisto della proprietà","ius excludendi + fruendi + disponendi: compressi o eliminati dalla licenza","detentore qualificato=non proprietario: non può prestare, rivendere, sublicenziare"],
-      arg:["ToS+DRM comprimono tutti i poteri dominicali classici","fornitore mantiene controllo post-vendita attraverso accesso remoto","piattaforma cloud si riserva il diritto di analizzare i file archiviati"],
-      caso:["Amazon Kindle 2009: cancella da remoto '1984' di Orwell dai Kindle degli utenti","Amazon accertava problema copyright e agiva unilateralmente","utenti scoprono di non aver acquistato il libro ma una licenza revocabile"]},
-    {n:43, t:"Esaurimento del diritto di distribuzione — UsedSoft / Tom Kabinet",
-      def:["principio di esaurimento=dopo prima vendita autorizzata il titolare perde controllo sulla circolazione","questione centrale: si applica ai file digitali trasmessi online?","distribuzione (si esaurisce) vs comunicazione al pubblico (non si esaurisce)"],
-      arg:["UsedSoft: download permanente con licenza una tantum=economicamente equivalente a compravendita materiale","Tom Kabinet: e-book non si esaurisce perché trasmissione=comunicazione al pubblico, non distribuzione","ratio economica: file digitale perfetto=sostituto perfetto della copia nuova → esaurimento distruggerebbe il mercato editoriale"],
-      caso:["UsedSoft (CGUE C-128/11, 2012): software usato può essere rivenduto → esaurimento si applica","Tom Kabinet (CGUE C-263/18, 2019): e-book usati NON rivendibili → comunicazione al pubblico","distinzione: software (utilità funzionale permanente) vs e-book (opera creativa sostitutiva)"]},
-    {n:44, t:"NFT — infungibilità — scarcità artificiale nell'ambiente digitale",
-      def:["NFT=Non-Fungible Token=asset digitale univoco e non replicabile su blockchain","infungibile=non intercambiabile con altro token identico","scarcità artificiale=l'abbondanza digitale viene artificialmente limitata dalla certificazione crittografica"],
-      arg:["token nativo=opera digitale originale=potenzialmente tutelabile da diritto d'autore","token non nativo=tokenizzazione di opera fisica preesistente=si trasferisce solo il token, non l'opera","chiunque può copiare e scaricare il file jpeg: l'NFT certifica solo la 'titolarità' non l'esclusiva d'uso"],
-      caso:["'Everydays: The First 5000 Days' di Beeple venduto da Christie's per $69M","chi acquista l'NFT: ottiene un certificato di titolarità su blockchain","Beeple mantiene il copyright: può ancora riprodurre e vendere l'opera originale"]},
-    {n:45, t:"L'eredità digitale — account — Caso Yahoo! / Facebook BGH",
-      def:["eredità digitale=sorti degli asset digitali (account, file, criptovalute) alla morte","piattaforme USA: clausole di intrasmissibilità e cancellazione automatica alla morte","conflitto: diritto successorio (erede subentra nei contratti) vs riservatezza terzi che comunicarono col defunto"],
-      arg:["diritto civile: erede subentra nei rapporti contrattuali che non siano personalissimi","account Facebook=non personalissimo: contiene beni patrimoniali (foto, ricordi), non solo comunicazioni intime","vs diritto alla riservatezza di chi ha scritto al defunto contando sulla segretezza"],
-      caso:["Yahoo! USA 2004: accesso negato alla famiglia del marine ucciso in Iraq, applicando i ToS","BGH Germania 2018: genitori ottengono accesso Facebook della figlia deceduta in metro","BGH: account=diario personale, rapporto contrattuale trasmissibile agli eredi"]},
-    {n:46, t:"Successione negli asset digitali — art. 2-terdecies d.lgs. 101/2018 — Apple iCloud",
-      def:["art. 2-terdecies=diritti relativi ai dati del defunto esercitabili da familiari o chi ha interesse proprio","limite: se defunto aveva espresso divieto formale, specifico e scritto in vita","fondamento: diritto alla protezione dei dati (non diritto successorio classico)"],
-      arg:["supera le clausole contrattuali americane di intrasmissibilità","'mandato post-mortem'=istituto classico risulta inefficace per i dati digitali","'ragioni familiari meritevoli di protezione'=categoria giuridica aperta che i giudici italiani hanno valorizzato"],
-      caso:["Casi Apple iCloud: Tribunali di Milano, Bologna, Roma (2021-2022)","genitori di figli deceduti chiedono accesso a iCloud per recuperare foto","Apple rifiutava citando policy statunitensi → tribunali italiani ordinano accesso applicando art. 2-terdecies"]},
-  ]},
-  {cap:6, title:"Responsabilità del Provider e Intelligenza Artificiale", questions:[
-    {n:47, t:"Il regime speciale del DSA — responsabilità intermediari — esonero hosting",
-      def:["DSA Reg. UE 2022/2065: esonero da responsabilità civile, penale e amministrativa","host provider (art. 6): memorizzazione duratura di informazioni fornite dall'utente","condizioni esonero (alternative): NON a conoscenza effettiva OPPURE rimozione immediata"],
-      arg:["struttura a cipolla DSA: più grandi → più obblighi aggiuntivi","DSA uniforma la frammentazione nazionale della Direttiva 2000/31/CE","principio base: provider deve agire tecnicamente in modo automatico, passivo, neutro"],
-      caso:["Glawischnig-Piesczek v. Facebook (CGUE C-18/18, 2019): giudice può ordinare rimozione contenuti 'identici o equivalenti'","senza necessità di autonoma valutazione giuridica della piattaforma","Facebook come host provider: esonero condizionato alla rimozione tempestiva"]},
-    {n:48, t:"Assenza del dovere generale di sorveglianza — SABAM / Telekabel / Glawischnig",
-      def:["art. 8 DSA: nessun obbligo generale di monitoraggio delle informazioni trasmesse o memorizzate","sorveglianza specifica e mirata su contenuti già individuati: ammessa","Glawischnig: 'identici o equivalenti' = deroga controllata all'art. 8"],
-      arg:["obbligo generale=comprime libertà d'impresa + libertà d'espressione + protezione dati","sorveglianza generalizzata=richiede valutazione giuridica autonoma della piattaforma=incompatibile con il ruolo neutro","CGUE: bilanciamento tra diritti fondamentali confligenti"],
-      caso:["SABAM v. Netlog (C-360/10): no filtro preventivo generale per social network","UPC Telekabel Wien (C-314/12): ISP può bloccare siti specifici ma NON installare filtri generali","Glawischnig-Piesczek v. Facebook (C-18/18): rimozione 'identici o equivalenti' ammessa senza valutazione autonoma"]},
-    {n:49, t:"Fornitura neutra vs hosting attivo — Louis Vuitton v. Google / L'Oréal v. eBay",
-      def:["hosting neutro/passivo=provider automatico, senza controllo editoriale=scudo di responsabilità","hosting attivo=selezione, organizzazione, promozione per scopo commerciale=perde l'esonero","DSA Considerando 22: funzioni di ricerca e indicizzazione di per sé non bastano a far perdere la neutralità"],
-      arg:["test: il provider ha esercitato controllo editoriale sui contenuti?","'clausola del buon samaritano' (art. 7 DSA): controlli volontari per rimuovere illeciti non fanno perdere l'esonero","DSA ha codificato la distinzione elaborata dalla giurisprudenza CGUE pre-2022"],
-      caso:["Louis Vuitton v. Google (CGUE C-236/08, 2010): AdWords=memorizzazione automatica=hosting neutro","L'Oréal v. eBay (CGUE C-324/09, 2011): eBay promuoveva attivamente gli annunci=hosting attivo=perde esonero","eBay ottimizzava la presentazione per trarne vantaggio commerciale → controllo editoriale"]},
-    {n:50, t:"DSA — Notice and Take Down — VLOPs — rischi sistemici",
-      def:["segnalazione qualificata (art. 9 DSA)=ordine dell'autorità competente → esonero automatico","segnalazione semplice (art. 16 DSA)=qualsiasi utente → genera 'conoscenza effettiva' → obbligo rimozione","VLOPs=>45M utenti attivi mensili UE=obblighi aggiuntivi di risk management"],
-      arg:["DSA uniforma procedure di rimozione a livello UE: fine della frammentazione nazionale","piattaforma deve motivare la restrizione e garantire sistemi di ricorso interni","VLOPs: audit rischi sistemici annuale + accessibilità dati per ricercatori accreditati"],
-      caso:["rischi sistemici VLOPs: contenuti illegali virali + pregiudizi ai processi elettorali + salute mentale dei minori","notice and stay-down (Direttiva Copyright): una volta rimosso, il provider deve impedirne il ricaricamento","DSA sostituisce la 'conoscenza effettiva' dell'hosting con procedure standardizzate"]},
-    {n:51, t:"Direttiva Copyright 2019/790 — diritti ancillari art. 15 — art. 17",
-      def:["Direttiva 2019/790: aggiorna tutela del diritto d'autore nel mercato unico digitale","art. 15=diritti ancillari degli editori di stampa: aggregatori news devono ottenere licenza per gli snippet","art. 17=piattaforme di condivisione compiono 'comunicazione al pubblico' → devono ottenere licenza PREVENTIVA"],
-      arg:["art. 15 tutela l'investimento editoriale: Google News non può usare estratti senza accordo commerciale","art. 17 ribalta l'onere: YouTube risponde direttamente se mancano le licenze, salvo prova di massimi sforzi","tre condizioni cumulative art. 17: licenza tentata + massimi sforzi per impedire upload + rimozione rapida segnalati"],
-      caso:["Google News: negozia accordi con editori o rischia sanzioni","YouTube: investe miliardi in Content ID come sistema di massimi sforzi","Direttiva ha trasformato le piattaforme di condivisione da hosting passive a 'comunicatori al pubblico'"]},
-    {n:52, t:"'Massimi sforzi' art. 17 — filtraggio preventivo — Caso Polonia (C-401/19)",
-      def:["'massimi sforzi': 1) tentare la licenza + 2) filtraggio preventivo caricamento + 3) rimozione rapida segnalati + 4) notice and stay-down","rischio strutturale: algoritmo non distingue violazione da parodia/critica/citazione","censura automatizzata: contenuti leciti bloccati preventivamente senza revisione umana"],
-      arg:["filtraggio automatico sistematico=sorveglianza generalizzata=incompatibile con art. 8 DSA","CGUE: bilanciamento proporzionato tra PI e libertà d'espressione","piattaforme devono garantire ricorso umano interno efficace per chi vede rimosso un contenuto legittimo"],
-      caso:["Polonia v. Parlamento e Consiglio (CGUE C-401/19, 2022)","Polonia impugna art. 17 per lesione della libertà di espressione","CGUE respinge: obblighi compatibili con la Carta SE i sistemi di ricorso umano garantiscono tutela rapida"]},
-    {n:53, t:"Responsabilità art. 2049 c.c. — danni offline dei collaboratori della piattaforma",
-      def:["art. 2049 c.c.=responsabilità solidale dei 'padroni e committenti' per danni dei loro prepositi","rapporto di preposizione=potere di direzione materiale sull'esecutore della prestazione","forma contrattuale (autonomo/dipendente) irrilevante se sostanza=subordinazione di fatto"],
-      arg:["piattaforma che fissa tariffe+itinerari+valutazioni+sanzioni disciplinari=di fatto preponente","danni fisici offline (sinistro stradale del rider)=piattaforma risponde solidalmente","Uber Spain: 'influenza decisiva'=criterio dell'SSI è anche criterio della preposizione"],
-      caso:["Uber Spain (CGUE C-434/15, 2017): Uber esercita influenza decisiva sui driver","sinistro causato dal conducente Uber: danneggiato può citare Uber ex art. 2049 c.c.","Airbnb Ireland: host mantiene autonomia organizzativa → no rapporto di preposizione → no art. 2049"]},
-    {n:54, t:"La Piramide del Rischio dell'AI Act — pratiche vietate (rischio inaccettabile)",
-      def:["AI Act Reg. UE 2024/1689: piramide del rischio a 4 livelli","rischio inaccettabile=incompatibile con diritti fondamentali e valori democratici UE=divieto assoluto","pratiche vietate: non possono essere immesse sul mercato né utilizzate nell'Unione"],
-      arg:["tecniche subliminali per distorcere comportamento causando danno","sfruttamento vulnerabilità legate ad età o disabilità","social scoring pubblico generalizzato | polizia predittiva basata solo su profilo personale","identificazione biometrica remota in tempo reale in spazi pubblici (salvo eccezioni strettissime per sicurezza)"],
-      caso:["sistema scoring cinese: esempio paradigmatico di pratica vietata in UE","Clearview AI: scraping biometrico da internet per banche dati riconoscimento facciale","riconoscimento facciale in spazi pubblici: solo se autorizzato preventivamente dalla magistratura per terrorismo o ricerca di vittime di reato"]},
-    {n:55, t:"Sistemi AI ad alto rischio — requisiti tecnici obbligatori",
-      def:["alto rischio=non vietati ma soggetti a iter normativo preventivo stringente","categorie: biometria, infrastrutture critiche, istruzione, occupazione, accesso servizi essenziali, giustizia","soggetti: fornitore (sviluppa+immette) + deployer (utilizza) + importatore + distributore"],
-      arg:["obblighi: governance dei dati training (accurati, privi di bias) + documentazione tecnica + log di funzionamento","supervisione umana obbligatoria (human oversight): persona fisica deve poter comprendere, ignorare, sospendere, spegnere il sistema (kill switch)","marcatura CE solo dopo valutazione di conformità → immissione sul mercato"],
-      caso:["sistemi di selezione CV algoritmici: alto rischio (occupazione)","scoring creditizio algoritmico: alto rischio (accesso servizi finanziari essenziali)","amministrazione della giustizia: AI usata come ausilio, mai come decisore autonomo"]},
-    {n:56, t:"AI Act — Modelli GPAI (LLM) — rischio sistemico — $10^25 FLOPs",
-      def:["GPAI (General Purpose AI)=modelli con 'generalità significativa': ampia gamma di compiti competenti","LLM (ChatGPT, Claude, Gemini)=inclusi nella categoria GPAI","rischio sistemico=capacità di impatto elevato su salute pubblica, sicurezza, processi democratici dell'UE"],
-      arg:["tutti i fornitori GPAI: trasparenza dataset di training (rispetto copyright) + sintesi contenuti utilizzati","rischio sistemico: soglia computazionale $10^25$ FLOPs di addestramento cumulativo","obblighi aggiuntivi rischio sistemico: Red Teaming, monitoraggio incidenti gravi, condivisione informazioni con Commissione"],
-      caso:["GPT-4 e Claude 3 Opus: modelli GPAI con potenziale rischio sistemico","$10^{25}$ FLOPs superati dai principali frontier models attuali","GPAI con rischio sistemico: obblighi di cybersecurity e test di robustezza"]},
-    {n:57, t:"IA generativa — rischio limitato (specifico) — deep fake — watermarking",
-      def:["rischio specifico/limitato=né vietato né alto rischio: obblighi di trasparenza mirati","chatbot + generatori di contenuti sintetici (testo, immagine, audio, video)","deep fake=contenuto sintetico che replica falsamente persona reale"],
-      arg:["obbligo informativo: utente deve sapere di interagire con un sistema AI","deroga: se interazione con AI è evidentemente palese dal contesto","watermarking: fornitore deve marcare tecnicamente i contenuti sintetici | deployer: deve etichettarli come 'generati da AI'"],
-      caso:["video deep fake di politici: obbligo di watermarking e label","truffe via audio sintetico (clonazione vocale): violazione obbligo trasparenza","deepfake non-consensuali di persone private: violazione del GDPR + obbligo trasparenza AI Act"]},
-    {n:58, t:"Direttiva prodotti difettosi 2024/2853 — black box algoritmica — danno immateriale",
-      def:["Direttiva 2024/2853 rinnova responsabilità oggettiva del produttore (aggiorna la direttiva del 1985)","estende 'prodotto' a: software + file per stampa 3D + sistemi AI","danno immateriale: distruzione/corruzione irreversibile di dati risarcibile come danno patrimoniale"],
-      arg:["AI=black box: vittima non può provare il difetto algoritmico senza documentazione tecnica interna","soluzione: il giudice può ordinare la 'divulgazione degli elementi di prova' (discovery)","abbatte l'asimmetria informativa: l'azienda è obbligata a esibire la documentazione tecnica riservata"],
-      caso:["pedone investito da auto a guida autonoma: incapace di provare il vizio dell'algoritmo","Direttiva: giudice ordina al costruttore di produrre i log e la documentazione del sistema","presunzione relativa del nesso causale: se il sistema è opaco e il danno si è verificato, si presume il difetto"]},
-  ]},
-  {cap:7, title:"Il Regime Giuridico dei Dati Personali", questions:[
-    {n:59, t:"Dal diritto alla riservatezza al diritto all'autodeterminazione informazionale",
-      def:["riservatezza (privacy difensiva)=diritto ad essere lasciati soli, non subire intrusioni","autodeterminazione informazionale=diritto attivo di controllare la circolazione delle proprie informazioni","Carta UE: art. 7=riservatezza | art. 8=protezione dei dati personali (diritto autonomo)"],
-      arg:["evoluzione necessaria: nella società digitale la semplice segretezza non è più sufficiente","conferimento dati è inevitabile per accedere ai servizi pubblici e privati","il diritto non mira più a nascondere ma a garantire la trasparenza e il controllo del trattamento"],
-      caso:["Sentenza sul Censimento (Corte Costituzionale Federale Tedesca, 1983)","legge censuaria imponeva raccolta massiva → Corte la dichiara incostituzionale","principio: in democrazia i cittadini devono poter decidere 'chi conosce cosa su di essi'"]},
-    {n:60, t:"Principi cardine del GDPR — accountability — minimizzazione — Privacy by design e by default",
-      def:["art. 5 GDPR: liceità+correttezza+trasparenza+limitazione finalità+minimizzazione+esattezza+limitazione conservazione+integrità/riservatezza+accountability","Privacy by design=protezione integrata fin dalla fase di progettazione del sistema","Privacy by default=impostazioni predefinite di massima protezione, solo dati strettamente necessari"],
-      arg:["accountability=il titolare deve DIMOSTRARE proattivamente la conformità (art. 24)","minimizzazione: non raccogliere più di quanto necessario per la finalità dichiarata","Registro dei Trattamenti (art. 30): espressione pratica del principio di accountability"],
-      caso:["Registro Trattamenti=documento dove il titolare mappa tutte le attività di trattamento","Privacy by design applicata ai sistemi di AI: protezione dati ingegnerizzata nell'architettura","violazione accountability=non avere un Registro aggiornato o documentazione adeguata delle misure adottate"]},
-    {n:61, t:"Condizioni di liceità del consenso — 'Consenti o Paga' — Caso Orange România",
-      def:["art. 6 GDPR: consenso=libero+informato+specifico+inequivocabile per ciascuna finalità","no silenzio, no caselle pre-spuntate, no inattività = consenso non valido","'Consenti o Paga'=alternativa: accetti il tracciamento pubblicitario O paghi un abbonamento"],
-      arg:["EDPB Parere 8/2024: per piattaforme dominanti il modello non garantisce libertà del consenso","costrizione economica dell'utente → consenso strutturalmente non libero","EDPB richiede: alternativa gratuita priva di tracciamento comportamentale"],
-      caso:["Orange România (CGUE C-61/19, 2020)","operatore inserisce consenso al trattamento dati nel contratto con caselle pre-selezionate","CGUE: consenso non valido se pre-selezionato O se il rifiuto impedisce la stipula del contratto"]},
-    {n:62, t:"Diritto alla cancellazione vs diritto alla deindicizzazione — Caso Google Spain",
-      def:["diritto alla cancellazione (art. 17 GDPR)=eliminazione del dato dal sistema del titolare","diritto alla deindicizzazione=rimozione del link dal motore di ricerca, ma la notizia originale resta intatta sul sito","bilanciamento: riservatezza vs interesse pubblico all'informazione"],
-      arg:["deindicizzazione=soluzione intermedia: protegge la riservatezza senza censurare la storia","figure pubbliche vs persone private: diverso peso dell'interesse pubblico","interesse pubblico preminente (es. personaggi politici in carica) prevale sulla riservatezza dell'individuo"],
-      caso:["Google Spain (CGUE C-131/12, 2014)","Costeja González chiede rimozione link a notizia del 1998 su pignoramento per debiti","CGUE: indicizzazione=trattamento dati | Google=titolare | diritto alla deindicizzazione riconosciuto salvo interesse pubblico preminente"]},
-    {n:63, t:"Art. 22 GDPR — diritto a non essere sottoposto a decisioni automatizzate",
-      def:["art. 22 GDPR=diritto a non essere sottoposto a decisione basata UNICAMENTE su trattamento automatizzato che produca effetti giuridici significativi","tre eccezioni: necessità contrattuale + autorizzazione legale UE/Stato + consenso esplicito","anche nelle eccezioni: diritto a intervento umano + esprimere opinione + contestare la decisione"],
-      arg:["ratio: proteggere dalla discriminazione algoritmica e dall'opacità decisionale delle macchine","profilazione sistematica che genera decisioni automatiche: scoring creditizio, selezione CV, mutui","le garanzie procedurali si applicano anche quando l'eccezione opera"],
-      caso:["scoring creditizio algoritmico: art. 22 impone revisione umana su richiesta","selezione automatica CV: il candidato scartato ha diritto a sapere perché e a contestare","concessione mutui tramite AI: istituto deve offrire revisione umana del diniego"]},
-    {n:64, t:"Art. 82 GDPR — ripartizione della prova — danno in re ipsa — Österreichische Post C-300/21",
-      def:["art. 82 GDPR=diritto al risarcimento per danno materiale o immateriale da violazione GDPR","presunzione di colpa del titolare: interessato prova trattamento illecito + danno + nesso causale","titolare si libera provando: misure adeguate adottate OPPURE caso fortuito"],
-      arg:["danno in re ipsa=ESCLUSO dalla CGUE: la sola violazione del GDPR non crea automaticamente diritto al risarcimento","interessato deve provare un danno effettivo (materiale o morale), non è sufficiente la mera violazione","non esiste però una soglia minima di gravità del danno immateriale per accedere al risarcimento"],
-      caso:["Österreichische Post (CGUE C-300/21, 2023)","Posta austriaca trattava dati per finalità di marketing politico","ricorrente chiede risarcimento solo per il 'turbamento' causato dalla violazione","CGUE: no danno in re ipsa, ma no soglia minima di gravità → danno anche lieve è risarcibile se provato"]},
-    {n:65, t:"Trasferimento dati verso gli USA — Schrems I e II — Data Privacy Framework",
-      def:["GDPR art. 45=trasferimento verso Paesi terzi solo con 'decisione di adeguatezza' della Commissione","problema strutturale USA: FISA+EO 12333 permettono sorveglianza di massa su non-americani senza garanzie giurisdizionali","evoluzione: Safe Harbour (2000) → Privacy Shield (2016) → Data Privacy Framework (2022)"],
-      arg:["FISA: intelligence USA accede ai dati UE senza autorizzazione giudiziaria individuale","incompatibile con principi di proporzionalità e ricorso effettivo garantiti dalla Carta UE","DPF 2022: introduce 'Data Protection Review Court' ma EDPB contesta l'indipendenza e l'effettività"],
-      caso:["Schrems I (CGUE C-362/14, 2015): invalida Safe Harbour","Schrems II (CGUE C-311/18, 2020): invalida Privacy Shield","Maximilian Schrems vs Facebook Ireland: entrambe le volte accordi diplomatici insufficienti a garantire protezione equivalente a quella UE"]},
-    {n:66, t:"Seconda ondata di enclosures sui dati grezzi — Data Act — Data Governance Act",
-      def:["prima enclosures=recinzione terre comuni nel '700 | seconda enclosures=dati grezzi IoT privatizzati tramite crittografia hardware","DGA Reg. 2022/868=condivisione volontaria dati non personali: intermediari dati + altruismo dei dati","Data Act Reg. 2023/2854=accesso obbligatorio ai dati IoT by design per utente e concorrenti"],
-      arg:["dati grezzi IoT=non coperti da copyright né segreto commerciale → fabbricanti usano crittografia per creare monopolio artificiale","DGA: cooperative dei dati + PIMS (sistemi di gestione dati personali) per riequilibrare l'accesso","Data Act: portabilità in tempo reale dei dati IoT verso utente finale + riparatori indipendenti"],
-      caso:["trattore John Deere: contadino non può far riparare il proprio trattore da meccanici indipendenti perché i dati diagnostici sono crittografati","Data Act: dispositivi IoT devono essere progettati con accesso by design per l'utente","DGA art. 16-25: organizzazioni di altruismo dei dati per ricerca scientifica e interesse pubblico"]},
-  ]}
+ {c:1, title:"Il Contesto", qs:[
+  {n:1, t:"Digitalizzazione vs datizzazione — Caso Google Books",
+   def:[
+    "La digitalizzazione converte informazioni dal formato analogico a sequenze binarie di bit.",
+    "La datizzazione è il passo ulteriore: trasforma quella stessa informazione in un dato quantificabile e processabile da un algoritmo.",
+    "Un file immagine è 'cieco' per il computer; solo la datizzazione lo rende materia prima analizzabile.",
+   ],
+   arg:[
+    "La digitalizzazione abbatte i costi di riproduzione; la datizzazione estrae valore economico dall'informazione.",
+    "Informazione datizzata → analisi statistica, ricerca di pattern, addestramento di intelligenze artificiali.",
+    "L'industria discografica, cinematografica e fotografica è crollata perché la rete ha reso possibile la condivisione perfetta, gratuita e istantanea.",
+   ],
+   caso:[
+    "Google Books (2004): nella fase 1 Google digitalizza milioni di libri tramite scanner (semplice copia immagine).",
+    "Nella fase 2 applica l'OCR, datizzando le immagini in testo calcolabile e interrogabile per parola chiave.",
+    "Con quel bacino di dati datizzati addestra Google Translate, generando un vantaggio competitivo immenso.",
+   ]},
+  {n:2, t:"L'economia dei bit: free, perfect, instant",
+   def:[
+    "L'economia digitale è governata dalla regola 'free, perfect and instant': il costo marginale di riproduzione è pari a zero.",
+    "La copia di un file digitale è perfetta: indistinguibile dall'originale, a differenza della fotocopia analogica.",
+    "La distribuzione è istantanea: le distanze geografiche vengono azzerate, la diffusione è globale e in tempo reale.",
+   ],
+   arg:[
+    "L'economia degli atomi è dominata dalla scarsità; l'economia dei bit stravolge questi vincoli con l'abbondanza strutturale.",
+    "Il costo marginale zero distrugge i modelli di business basati sulla vendita di supporti fisici.",
+    "La transizione obbligata è dal possesso del prodotto all'abbonamento al servizio (Spotify, Netflix).",
+   ],
+   caso:[
+    "Il fallimento di Kodak (2012) è il paradigma: l'azienda non ha saputo adattarsi alla fotografia digitale gratuita e istantanea.",
+    "L'industria discografica ha visto i ricavi crollare del 75% in un decennio per effetto della condivisione peer-to-peer.",
+    "Spotify e Netflix dimostrano come il nuovo modello di business vincente sia il servizio in abbonamento, non la vendita del file.",
+   ]},
+  {n:3, t:"Piramide DIKW e Big Data — dalla causalità alla correlazione",
+   def:[
+    "La piramide DIKW descrive la gerarchia dell'informazione: Dati grezzi → Informazioni → Conoscenza → Saggezza decisionale.",
+    "I Big Data sono definiti dalle 3V: Volume (mole sterminata), Velocità (generazione e analisi in tempo reale), Varietà (fonti eterogenee).",
+    "L'avvento dei Big Data altera i primi gradini della piramide: la datizzazione totale del reale sostituisce i campioni statistici limitati.",
+   ],
+   arg:[
+    "Il cambiamento più radicale è epistemologico: si passa dal nesso causale ('perché X causa Y?') alla correlazione statistica ('quando X, anche Y').",
+    "L'algoritmo non cerca il 'perché': si accontenta di rilevare che al variare di X varia statisticamente anche Y.",
+    "Questo ha portato alcuni studiosi a teorizzare la 'fine della teoria': i modelli esplicativi diventano superflui.",
+   ],
+   caso:[
+    "I traduttori automatici moderni non conoscono la grammatica né la sintassi causale di una lingua.",
+    "Calcolano su sterminati testi datizzati la probabilità statistica che una parola segua un'altra in un dato contesto.",
+    "Ottengono risultati superiori ai sistemi basati su regole umane: esempio paradigmatico della correlazione che supera la causalità.",
+   ]},
+  {n:4, t:"Fasi evolutive dell'IA — definizione giuridica dell'AI Act",
+   def:[
+    "Expert Systems (anni '70-'80): logica rigida if-then, incapaci di apprendere autonomamente e di gestire l'imprevedibile.",
+    "Machine Learning e reti neurali (anni '90-2000): la macchina non viene programmata con regole ma impara da sola analizzando dati.",
+    "LLM e IA generativa (oggi): creano autonomamente nuovi contenuti testuali e visivi, con il rischio strutturale di 'allucinazioni'.",
+   ],
+   arg:[
+    "Il salto qualitativo del ML: il sistema impara per pattern recognition, il deep learning simula a strati il cervello umano.",
+    "Gli LLM non si limitano ad analizzare: generano su base probabilistica contenuti nuovi, che possono essere falsi ma plausibili.",
+    "La definizione giuridica dell'AI Act è tecnologicamente neutra per resistere all'obsolescenza normativa.",
+   ],
+   caso:[
+    "AI Act (Reg. UE 2024/1689): un sistema di IA è 'un sistema automatizzato progettato per funzionare con livelli di autonomia variabili'.",
+    "La definizione cattura la caratteristica essenziale: il sistema deduce dall'input come generare output (previsioni, contenuti, decisioni).",
+    "Tali output 'possono influenzare ambienti fisici o virtuali': la norma abbraccia sia l'IA software che quella incorporata in dispositivi fisici.",
+   ]},
+  {n:5, t:"Blockchain, proof-of-work, Smart Contract, DAO",
+   def:[
+    "La blockchain è un registro informatico distribuito e permanente, basato su crittografia asimmetrica per validare le transazioni senza un'autorità centrale.",
+    "Il proof-of-work: i 'minatori' competono risolvendo enigmi matematici; chi risolve per primo valida il blocco e riceve la ricompensa in criptovaluta.",
+    "Uno Smart Contract è un accordo tradotto in codice auto-eseguibile: al verificarsi di condizioni oggettive, la prestazione si esegue automaticamente e inarrestabilmente.",
+   ],
+   arg:[
+    "La sicurezza della blockchain: falsificare una transazione richiederebbe di ricalcolare proof-of-work di tutti i blocchi successivi — computazionalmente impossibile.",
+    "Le DAO (Distributed Autonomous Organizations) sono modelli aziendali governati da codice senza organi direttivi umani: le regole sono formalizzate in smart contract.",
+    "Il problema delle DAO: nessuna responsabilità giuridica attribuibile, nessun soggetto fisico o giuridico a cui imputare le obbligazioni.",
+   ],
+   caso:[
+    "NFT: l'artista Beeple vende l'opera 'Everydays' tramite Christie's per 69 milioni di dollari tramite uno smart contract su blockchain.",
+    "Chi acquista l'NFT ottiene un certificato digitale di titolarità, non l'opera in sé: chiunque può copiare e scaricare il file jpeg.",
+    "Il caso mostra come gli NFT reintroducano artificialmente il concetto di scarcità in un ambiente digitale strutturalmente abbondante.",
+   ]},
+  {n:6, t:"Mass customization — Industria 4.0 — stampa 3D",
+   def:[
+    "L'Industria 4.0 è la radicale riorganizzazione della catena del valore derivata dall'integrazione di IoT, Big Data e robotica nei processi manifatturieri.",
+    "L'additive manufacturing (stampa 3D) produce in modo 'additivo' — iniettando materiale strato dopo strato — anziché 'sottrattivo' come la lavorazione tradizionale.",
+    "La mass customization: la stampante 3D ha lo stesso costo unitario per 1 o per 100.000 pezzi, rendendo economicamente sostenibile la personalizzazione totale.",
+   ],
+   arg:[
+    "Il modello fordista richiedeva grandi serie per abbattere i costi unitari; l'additive manufacturing elimina questa necessità strutturale.",
+    "La coda lunga (Anderson): abbattuti i costi di prototipizzazione e stoccaggio, diventa redditizio rivolgersi a milioni di nicchie specifiche.",
+    "Prodotti prima economicamente insostenibili (protesi mediche su misura, componenti di design unici) diventano accessibili.",
+   ],
+   caso:[
+    "Il modello fordista (Ford Model T: 'qualsiasi colore purché nero') è superato dalla produzione additiva che personalizza a costo marginale nullo.",
+    "Chris Anderson: la 'coda lunga' del mercato delle nicchie sommate supera il mercato dei bestseller del modello distributivo tradizionale.",
+    "Esempio paradigmatico: protesi mediche su misura stampate in 3D, prima proibitive per i costi, ora accessibili a chiunque.",
+   ]},
+  {n:7, t:"Analisi costi-benefici vs Principio di Precauzione",
+   def:[
+    "L'analisi costi-benefici è un approccio utilitaristico: un'innovazione è accettabile se i vantaggi attesi superano i costi e i rischi stimati.",
+    "Il Principio di Precauzione: in caso di rischio di danno grave o irreversibile, l'assenza di piena certezza scientifica non deve impedire misure preventive.",
+    "I due approcci riflettono sistemi di valori divergenti: USA privilegia il calcolo utilitaristico; EU aggiunge un vaglio etico-morale che può prevalere sul vantaggio economico.",
+   ],
+   arg:[
+    "Il Principio di Precauzione è formalizzato nella Dichiarazione di Rio (1992): rischio di danno grave/irreversibile → misure preventive anche in assenza di certezza scientifica.",
+    "Critica al principio di precauzione: intervenire troppo presto può frenare tecnologie promettenti e creare svantaggio competitivo rispetto a USA e Cina.",
+    "L'innovazione senza permesso (permissionless innovation) è la risposta USA: si sperimenta, si interviene ex post solo se i danni si materializzano.",
+   ],
+   caso:[
+    "Diamond v. Chakrabarty (USA, 1980): la Corte Suprema ammette la brevettazione di microrganismi geneticamente modificati con puro calcolo utilitaristico.",
+    "Brüstle v. Greenpeace (CGUE C-34/10, 2011): la Corte vieta la brevettazione di invenzioni che implicano la distruzione di embrioni umani.",
+    "La CGUE sancisce esplicitamente che ragioni etiche e morali prevalgono sempre sul mero vantaggio tecnologico o utilitaristico.",
+   ]},
+  {n:8, t:"Innovazione senza permesso (permissionless innovation)",
+   def:[
+    "La permissionless innovation: le politiche pubbliche devono ispirarsi a un tendenziale favore verso la sperimentazione senza autorizzazioni preventive (placet).",
+    "Si contrappone nettamente al Principio di Precauzione: non si vieta mai in anticipo, si interviene con rimedi ex post solo se il danno si materializza.",
+    "I rimedi ex post affidati al diritto privato: responsabilità civile, diritto contrattuale e norme antitrust.",
+   ],
+   arg:[
+    "I 'placet preventivi' — licenze, concessioni, autorizzazioni — si traducono in barriere all'ingresso insormontabili per le startup.",
+    "Le barriere burocratiche avvantaggiano le corporazioni già consolidate sul mercato, che le usano come strumento anticoncorrenziale.",
+    "La critica: rimedi ex post inefficaci per danni irreversibili (ambientali, sanitari); la precauzione tutela interessi che il mercato non internalizza.",
+   ],
+   caso:[
+    "Uber e Airbnb: hanno lanciato i loro servizi senza le autorizzazioni richieste a taxi e alberghi, sfidando il regolatore a intervenire ex post.",
+    "Le categorie preesistenti (tassisti, albergatori) hanno risposto con lobbying per bloccare le piattaforme, non con la competizione sul servizio.",
+    "Il caso configura la cattura del regolatore: le norme invocate per la 'sicurezza pubblica' servono a preservare rendite di posizione esistenti.",
+   ]},
+  {n:9, t:"Distruzione Creatrice di Schumpeter — monopolio e innovazione",
+   def:[
+    "La distruzione creatrice (Schumpeter): ondate di innovazione radicale distruggono le strutture economiche obsolete e le rimpiazzano con nuovi prodotti e servizi.",
+    "Il monopolio non è un'anomalia patologica ma il giusto premio temporaneo per chi ha innovato: incentivo economico a sostenere l'R&S rischiosa.",
+    "Solo l'impresa monopolista ha le risorse per sostenere investimenti R&S lunghi, onerosi e altamente aleatori.",
+   ],
+   arg:[
+    "La curva a U rovesciata: né il monopolio assoluto (assopisce lo stimolo competitivo) né la concorrenza perfetta (polverizza i profitti) massimizzano l'innovazione.",
+    "L'equilibrio ottimale è la 'concorrenza moderata': abbastanza competizione per stimolare l'innovazione, abbastanza margine per finanziare la ricerca.",
+    "Il monopolio temporaneo garantisce il ritorno economico attraverso prezzi superiori a quelli competitivi, che finanziano il ciclo successivo di innovazione.",
+   ],
+   caso:[
+    "Copyright Term Extension Act (USA, 1998): il Congresso americano prolungò di 20 anni i diritti d'autore su opere storiche.",
+    "Il lobbying della Disney spostò l'ingresso di Topolino nel pubblico dominio di altri 20 anni: pura cattura del regolatore.",
+    "Un'estensione retroattiva su opere già abbondantemente redditizie non si giustifica come incentivo a future innovazioni: è appropriazione privata di beni collettivi.",
+   ]},
+  {n:10, t:"Concezione atomistica vs Stato Innovatore",
+   def:[
+    "Concezione atomistica: l'innovazione è un processo isolato e lineare, trainato da singoli individui mossi dalla ricerca del profitto nel mercato.",
+    "Teoria dello Stato Innovatore (Mazzucato): l'innovazione ha carattere cumulativo e collettivo; la ricerca di base — ad alto rischio — è finanziata dallo Stato.",
+    "La conoscenza è un bene non rivale: la sua massima diffusione genera benefici sociali enormi, ma la PI crea escludibilità artificiale come incentivo.",
+   ],
+   arg:[
+    "Se l'innovazione è cumulativa e collettiva, l'architettura dei diritti di proprietà intellettuale appare ingiustificatamente estesa a favore dei privati.",
+    "Allungare i monopoli legali oltre il necessario frena l'innovazione cumulativa e traduce in appropriazione privata benefici originati collettivamente.",
+    "Il paradosso: la PI è necessaria come incentivo alla creazione, ma troppa PI distrugge l'innovazione cumulativa che presuppone l'accesso libero alle idee.",
+   ],
+   caso:[
+    "Copyright Term Extension Act (USA, 1998): estensione retroattiva di 20 anni dei diritti d'autore su opere storiche già redditizie.",
+    "Spinto dalle lobbies della Disney per posticipare l'ingresso di Topolino nel pubblico dominio: nessuna giustificazione come incentivo a future innovazioni.",
+    "Il caso dimostra plasticamente la cattura del regolatore: la norma protegge il monopolista, non stimola l'innovazione.",
+   ]},
+ ]},
+ {c:2, title:"Diritto e Mercati Digitali", qs:[
+  {n:11, t:"Regolabilità della rete — Code is Law — DRM",
+   def:[
+    "Code is Law (Lessig): nell'ecosistema digitale la vera norma non deriva solo dai legislatori statali, ma è scritta nel codice informatico e nell'architettura degli spazi virtuali.",
+    "Un divieto imposto dal codice si auto-esegue: inibisce tecnicamente l'azione in modo insuperabile, prima ancora che l'individuo possa scegliere di violarla.",
+    "A differenza della legge ordinaria — che si può violare subendo la sanzione ex post — il codice preclude fisicamente il comportamento.",
+   ],
+   arg:[
+    "L'evoluzione tecnica (cookie, HTML5, geoblocking) ha trasformato la rete da spazio anonimo a spazio perennemente identificabile e iper-sorvegliato.",
+    "L'anonimato strutturale degli anni '90 (cyberlibertarianismo) è un'illusione superata: TCP/IP + cookie + cloud rendono ogni utente tracciabile.",
+    "I privati sconfiggono tecnologicamente il diritto statale: i DRM precludono usi che sarebbero legalmente leciti secondo le norme del diritto d'autore.",
+   ],
+   caso:[
+    "I DRM (Digital Rights Management) sono l'esempio emblematico di Code is Law: misure crittografiche che bloccano automaticamente la copia, la modifica e la ridistribuzione.",
+    "I DRM precludono anche il fair use legalmente garantito (critica, parodia, didattica): il codice è più potente della legge.",
+    "Lessig: il legislatore perde il controllo della norma quando il codice privatistico diventa il vero regolatore dello spazio digitale.",
+   ]},
+  {n:12, t:"Fallimento del mercato — asimmetrie informative — esternalità",
+   def:[
+    "Il fallimento del mercato si verifica quando il mercato non riesce ad allocare le risorse in modo efficiente, legittimando l'intervento regolatorio pubblico.",
+    "Le cause principali: asimmetrie informative (venditore sa più del compratore), esternalità (costi su terzi non internalizzati nel prezzo), scostamenti dalla razionalità individuale.",
+    "Nei mercati digitali l'asimmetria informativa è strutturalmente abissale: le piattaforme accumulano Big Data sugli utenti, profilandoli in modo opaco.",
+   ],
+   arg:[
+    "La 'tirannia delle piccole decisioni': l'effetto cumulativo di infinite transazioni lecite (es. Airbnb) sfigura le città, danneggiando i residenti senza che nessuno lo abbia deciso.",
+    "Le esternalità digitali sono spesso negative e invisibili: raccolta massiva di dati, dipendenze comportamentali, polarizzazione del discorso pubblico.",
+    "Il rimedio: internalizzare le esternalità obbligando l'impresa a farsi carico dell'impatto prodotto sulla società (tassazione, obblighi di riparazione).",
+   ],
+   caso:[
+    "Akerlof (1970): il 'mercato dei lemons' (auto usate) illustra la selezione avversa causata dall'asimmetria informativa.",
+    "L'acquirente non distingue il peach (auto buona) dal lemon (bidone) e offre un prezzo medio: i venditori di auto buone si ritirano.",
+    "Rimane solo la coda bassa del mercato: la selezione avversa porta al collasso progressivo della qualità media dell'offerta.",
+   ]},
+  {n:13, t:"Fallimenti dello Stato — Public Choice — cattura del regolatore",
+   def:[
+    "La scuola della Public Choice: il legislatore e i burocrati sono agenti razionali che tendono a massimizzare la propria utilità, non il bene collettivo.",
+    "I fallimenti dello Stato: l'azione governativa genera inefficienze strutturali proprie, non meno dannose dei fallimenti del mercato.",
+    "La cattura del regolatore (Stigler): le istituzioni patiscono un gap informativo rispetto all'industria ad alta specializzazione; potenti gruppi d'interesse cooptano le agenzie pubbliche.",
+   ],
+   arg:[
+    "Le revolving doors: il funzionario pubblico passa all'industria regolata (e viceversa), portando con sé relazioni e informazioni privilegiate.",
+    "Le norme approvate 'in nome della protezione pubblica' finiscono per creare barriere all'ingresso per i nuovi entranti, a vantaggio degli incumbent.",
+    "Il lobbying come spreco di risorse: le imprese investono in influenza politica invece che in produttività, distorcendo l'allocazione dell'economia.",
+   ],
+   caso:[
+    "Il caso Uber e Airbnb come cattura del regolatore: tassisti e albergatori attivano pressioni di lobbying sui legislatori per bloccare le piattaforme.",
+    "Gli obblighi anacronistici imposti alle piattaforme non tutelano la sicurezza pubblica: preservano le rendite di posizione delle categorie preesistenti.",
+    "L'ironia: le categorie colpite non competono sul servizio (che sarebbe peggiore), ma competono nel catturare il regolatore.",
+   ]},
+  {n:14, t:"Dilemma di Collingridge — normazione sperimentale — co-regolazione",
+   def:[
+    "Il Dilemma di Collingridge: fissare regole quando la tecnologia è agli albori è facile ma espone a errori colossali (gli impatti non sono ancora decifrabili).",
+    "Aspettare che la tecnologia sia matura elimina il rischio di errore valutativo, ma rende l'intervento di contenimento politicamente oneroso o impossibile.",
+    "La normazione sperimentale risolve lo stallo: clausole di scadenza che impongono revisioni periodiche dinamiche sincronizzate all'evoluzione tecnologica.",
+   ],
+   arg:[
+    "La neutralità tecnologica: dettare prescrizioni valide per un problema sociale a prescindere dal software impiegato, per non creare obsolescenza normativa immediata.",
+    "La co-regolazione: lo Stato fissa il fine pubblico, i privati esperti del settore gestiscono l'applicazione materiale grazie alla loro expertise tecnica.",
+    "L'autoregolazione: i destinatari del mercato digitale formulano autonomamente standard civici flessibili, più aggiornati della legislazione statale.",
+   ],
+   caso:[
+    "Il Dieselgate (2015): Volkswagen introduce nel motore un software che riconosce il ciclo di prova emissioni e si adatta, falsando i risultati del test.",
+    "Le autorità misuravano gas materiale: erano totalmente cieche davanti alla manipolazione algoritmica del software.",
+    "Il caso dimostra plasticamente che le normative della società analogica sono inadeguate a governare entità informatiche invisibili.",
+   ]},
+  {n:15, t:"Fiducia nei mercati digitali — segnali credibili — Lex Mercatoria",
+   def:[
+    "Nei mercati digitali si traffica tra estranei a distanze oceaniche senza la protezione di un giudice statale tempestivo: serve un ecosistema fiduciario alternativo.",
+    "I segnali credibili: un segnale è degno di fede solo se presenta una correlazione inversa fra costo di emissione e qualità del mittente — costoso da simulare per chi è disonesto.",
+    "I sistemi reputazionali digitali (rating peer review generato dagli utenti): una cattiva nomea causa smacchi d'affari enormi, agendo come 'seconda mano invisibile'.",
+   ],
+   arg:[
+    "Lo stigma reputazionale è più efficace di qualunque processo giudiziario: il cattivo venditore viene ostracizzato dal mercato in tempo reale.",
+    "La garanzia volontaria è un segnale credibile: è enormemente costosa e deleteria da simulare per un operatore incauto, garantendo la genuinità per l'acquirente.",
+    "Il limite: le recensioni possono essere falsificate (es. mercato delle recensioni false su Amazon), corrompendo l'integrità del sistema reputazionale.",
+   ],
+   caso:[
+    "La Lega dei Mercanti Magrebini medievale: commercianti ebrei del Mediterraneo costruirono una fiducia incrollabile sul passaparola, senza alcun sistema giudiziario statale sovranazionale.",
+    "Chi frodava veniva isolato per sempre dal circuito commerciale: lo stesso meccanismo del rating eBay che decreta la morte commerciale del venditore disonesto.",
+    "L'analogia storica dimostra che la fiducia nei mercati transazionali può essere costruita su meccanismi privatistici reputazionali, senza l'intervento dello Stato.",
+   ]},
+  {n:16, t:"Costi di transazione di Coase — disintegrazione verticale — crowdsourcing",
+   def:[
+    "Coase (Nobel): l'organizzazione della produzione ruota intorno all'alternativa make (produrre con dipendenti) o buy (acquistare all'esterno con contratti).",
+    "La scelta dipende dai costi transattivi: ricerca della controparte, negoziazione, stipula, monitoraggio e enforcement del contratto.",
+    "Il digitale ha abbattuto radicalmente i costi di comunicazione e controllo a distanza: il buy diventa sistematicamente più conveniente del make.",
+   ],
+   arg:[
+    "Il modello '900: l'impresa integrata verticalmente per esercitare controllo diretto sui dipendenti e abbattere il rischio di comportamenti opportunistici.",
+    "La disintegrazione verticale: il digitale rende più efficiente esternalizzare (buy) perché i costi di transazione sul mercato sono crollati.",
+    "Il crowdsourcing: l'impresa esternalizza compiti complessi a una 'folla' disaggregata globale, risparmiando i costi fissi e gerarchici della fabbrica.",
+   ],
+   caso:[
+    "Amazon Mechanical Turk: l'impresa esternalizza micro-compiti a una folla disaggregata globale, acquistando i risultati a costi irrisori.",
+    "Waze: la saggezza della folla costruisce la mappa del traffico in tempo reale — superiore alle mappe statiche degli esperti centralizzati.",
+    "Entrambi i casi dimostrano che il digitale ha spostato strutturalmente l'equilibrio make/buy verso l'outsourcing sistematico.",
+   ]},
+  {n:17, t:"Commons based peer production — motivazioni intrinseche — crowding out",
+   def:[
+    "La commons based peer production (Benkler): una vasta comunità contribuisce volontariamente alla creazione di beni immateriali in un regime di libero accesso.",
+    "I due requisiti tecnici: modularità (il progetto si scompone in parti autonome lavorabili separatamente) e granularità (i contributi minimi sono sufficienti e utili).",
+    "Gli individui non collaborano per massimizzare il proprio conto in banca ma per motivazioni intrinseche: sfida intellettuale, piacere, costruzione della reputazione sociale.",
+   ],
+   arg:[
+    "L'effetto crowding out (spiazzamento): inserire incentivi monetari in dinamiche di CBPP è letale — corrompono la genuinità civica e distruggono la cooperazione.",
+    "Esempio: pagare le persone per donare il sangue riduce le donazioni volontarie — il denaro esternalizza una motivazione che era intrinseca.",
+    "La CBPP smonta il mito dell'homo oeconomicus: gli individui collaborano per ragioni che il modello del massimizzatore razionale non riesce a spiegare.",
+   ],
+   caso:[
+    "Wikipedia: enciclopedia costruita senza alcuna direzione editoriale centrale, da milioni di volontari mossi da motivazioni intrinseche.",
+    "Linux: sistema operativo open source sviluppato dalla community — oggi il principale sistema operativo usato a livello server mondiale.",
+    "Entrambi dimostrano la superiorità dell'autoselezione dei compiti rispetto all'assegnazione gerarchica: chi sceglie cosa fare produce meglio.",
+   ]},
+ ]},
+ {c:3, title:"Piattaforme, Concorrenza e Mercati", qs:[
+  {n:18, t:"Mercati bilaterali — dilemma uovo/gallina — legge dell'unico prezzo",
+   def:[
+    "Mercato bilaterale: la piattaforma si pone come intermediario tra due o più gruppi di utenti distinti ma interdipendenti, facilitandone l'incontro e lo scambio.",
+    "Il dilemma dell'uovo e della gallina: per attirare viaggiatori servono albergatori, ma gli albergatori si iscrivono solo se c'è un vasto bacino di viaggiatori.",
+    "La legge dell'unico prezzo (o dei beni complementari): abbattendo il prezzo del bene complementare, esplode la domanda del bene primario.",
+   ],
+   arg:[
+    "La flessibilità della domanda determina quale lato sussidiare: si sceglie il lato più elastico (più sensibile al prezzo) per innescare il mercato.",
+    "I switching costs artificialmente elevati creano il lock-in: ecosistemi integrati rendono il passaggio al concorrente economicamente svantaggioso.",
+    "Il multihoming (uso contemporaneo di più piattaforme) è la risposta competitiva al lock-in: gli utenti non devono scegliere esclusivamente una piattaforma.",
+   ],
+   caso:[
+    "Google distribuisce Android agli sviluppatori a costo zero: abbatte il prezzo dell'hardware, inonda il mercato di smartphone Android.",
+    "L'obiettivo non è guadagnare sul sistema operativo ma spingere miliardi di utenti verso il motore di ricerca preinstallato.",
+    "Il mercato publicitario è il vero 'bene primario': Android è il bene complementare il cui prezzo zero massimizza gli introiti publicitari.",
+   ]},
+  {n:19, t:"Esternalità di rete — rendimenti di scala — lock-in — winner takes all",
+   def:[
+    "Winner takes all: i mercati digitali tendono strutturalmente alla monopolizzazione per effetto della confluenza di tre forze.",
+    "Esternalità di rete: l'utilità del servizio cresce esponenzialmente all'aumentare degli utenti — chi è primo attira tutti gli altri.",
+    "Rendimenti di scala sui dati: più dati → algoritmo migliore → vantaggio incolmabile per i concorrenti con meno dati.",
+   ],
+   arg:[
+    "Le esternalità di rete incrociate: la crescita di un lato del mercato genera un vantaggio smisurato per l'altro lato.",
+    "Il lock-in: la piattaforma costruisce ecosistemi integrati e interdipendenti che rendono il passaggio al rivale economicamente o socialmente svantaggioso.",
+    "Il multihoming come antidoto: normative che impongono l'interoperabilità abbassano i switching costs e contrastano la monopolizzazione.",
+   ],
+   caso:[
+    "Facebook: ogni nuovo utente aumenta l'utilità per tutti gli altri (esternalità di rete) — il social network più grande vince strutturalmente.",
+    "Google Search: ogni nuova query perfeziona l'algoritmo rendendolo imbattibile — vantaggio che i concorrenti non possono colmare.",
+    "Amazon: più venditori attraggono più compratori, che attraggono più venditori — spirale autocatalítica verso il monopolio del marketplace.",
+   ]},
+  {n:20, t:"Lavoro nella Gig Economy — Caso Foodora — Direttiva 2024/2831",
+   def:[
+    "La Gig Economy si avvale di lavoratori 'a chiamata' (rider) in una zona grigia contrattuale tra lavoro autonomo, subordinato e un ipotetico 'tertium genus'.",
+    "La Direttiva 2024/2831 introduce il 'primato dei fatti': si guarda a come il rapporto è effettivamente svolto nella pratica, non al nome del contratto.",
+    "Presunzione relativa di subordinazione (art. 5): al ricorrere di determinati indicatori, il rapporto è presunto subordinato — l'onere della prova si sposta sulla piattaforma.",
+   ],
+   arg:[
+    "La piattaforma che fissa tariffe, assegna corse, controlla la condotta e irroga sanzioni disciplinari tramite algoritmo esercita influenza decisiva sulla prestazione.",
+    "Il 'tertium genus' è stato definitivamente respinto dalla Cassazione italiana: il diritto non tollera zone grigie che eludano le tutele lavorative.",
+    "L'art. 5 Direttiva: la piattaforma deve dimostrare che il rapporto non è subordinato — l'onere della prova è ribaltato a tutela del lavoratore.",
+   ],
+   caso:[
+    "Cass. n. 1663/2020 — Caso Foodora: la Corte di Cassazione italiana applica l'art. 2 d.lgs. 81/2015 sulle collaborazioni etero-organizzate.",
+    "Il principio: se la piattaforma decide i tempi e le modalità della prestazione attraverso l'applicazione, al fattorino si estendono le tutele del lavoro subordinato.",
+    "Il Caso Foodora chiude definitivamente la questione del 'terzo genere': non esiste una via di mezzo che giustifichi l'elusione delle tutele lavorative.",
+   ]},
+  {n:21, t:"Il soggetto che eroga il 'servizio sottostante' — Uber Spain / Airbnb Ireland",
+   def:[
+    "Contratti SSI (d.lgs. 70/2003): servizi immateriali a distanza e per via elettronica — disciplinati dal diritto del commercio elettronico.",
+    "Contratti per il 'servizio sottostante': la prestazione materiale (trasporto, alloggio) intermediata dalla piattaforma — disciplinata dalla normativa settoriale specifica.",
+    "Il criterio discriminante (Commissione UE, Comunicazione 356/2016): chi esercita 'influenza decisiva' sulla prestazione eroga materialmente il servizio sottostante.",
+   ],
+   arg:[
+    "Indicatori di 'influenza decisiva': la piattaforma stabilisce il prezzo finale, impone istruzioni vincolanti agli esecutori, detiene i beni essenziali per la prestazione.",
+    "Se la piattaforma eroga il servizio sottostante → responsabilità diretta + normativa settoriale (licenze taxi, normativa alberghiera) applicabile.",
+    "La distinzione è vitale per determinare se imporre alla piattaforma il rispetto di licenze, concessioni e obblighi tipici dei settori regolamentati.",
+   ],
+   caso:[
+    "Uber Spain (CGUE C-434/15, 2017): Uber assegna inderogabilmente le corse, determina autoritativamente le tariffe e controlla la condotta dei driver.",
+    "La CGUE qualifica Uber come 'servizio di trasporto' — non come SSI — rendendolo soggetto alle normative comunali sui taxi e alle licenze.",
+    "Airbnb Ireland (CGUE C-390/18, 2019): Airbnb non fissa il prezzo degli affitti né costituisce l'unico canale esclusivo per affittare → qualificato come SSI.",
+   ]},
+  {n:22, t:"Antitrust e dati — fusioni data-driven — Caso Meta (C-252/21)",
+   def:[
+    "Nei mercati digitali i dati sono il principale asset concorrenziale: chi li possiede in massa costruisce barriere all'ingresso incolmabili per i concorrenti.",
+    "Le fusioni 'data-driven' tra piattaforme devono essere scrutinate per valutare se l'unione dei dataset crei un monopolio sui dati stesso.",
+    "La svolta: la violazione del GDPR nella raccolta dei dati può costituire un elemento dell'abuso di posizione dominante — antitrust e privacy convergono.",
+   ],
+   arg:[
+    "Il Bundeskartellamt tedesco (2019): inibisce a Facebook il 'data grabbing' tra Instagram, WhatsApp e siti terzi senza consenso — antitrust + GDPR.",
+    "La CGUE (C-252/21, 2023): un'autorità antitrust può e deve verificare se la piattaforma dominante violi il GDPR nella raccolta dei dati.",
+    "La base giuridica della 'necessità contrattuale' non può essere invocata strumentalmente per legittimare trattamenti non indispensabili all'esecuzione del contratto.",
+   ],
+   caso:[
+    "Meta v. Bundeskartellamt (CGUE C-252/21, 2023): il trattamento dei 'dati off' (navigazione su Instagram, WhatsApp e siti terzi) non trova fondamento nella necessità contrattuale.",
+    "Tali dati servono esclusivamente alla profilazione publicitaria, non all'esecuzione del contratto di accesso al social network.",
+    "La CGUE sancisce: la posizione dominante di Meta comprime la libertà di scelta dell'utente, rendendo il consenso strutturalmente non libero.",
+   ]},
+  {n:23, t:"Pratiche leganti e self-preferencing — Microsoft / Google Shopping / Enel JuicePass",
+   def:[
+    "Tying e bundling: fornitura del servizio principale condizionata all'acquisto di un servizio secondario — estensione del monopolio ai mercati adiacenti.",
+    "Self-preferencing: alterazione fraudolenta degli algoritmi per privilegiare i propri prodotti nelle classifiche a danno dei concorrenti.",
+    "Il DMA (art. 5) ha codificato questi divieti come obblighi self-executing per i Gatekeeper: automaticamente applicabili, senza possibilità di negoziazione.",
+   ],
+   arg:[
+    "Il self-preferencing è particolarmente insidioso: l'utente non sa che i risultati che vede sono stati falsati algoritmicamente a proprio danno.",
+    "Il tying sfrutta il monopolio del sistema operativo per escludere i concorrenti dai mercati adiacenti (browser, player multimediali, mappe).",
+    "L'antitrust tradizionale interviene ex post e lentamente; il DMA introduce obblighi ex ante che non richiedono la prova dell'abuso.",
+   ],
+   caso:[
+    "Microsoft (1998/2004): impone l'installazione forzata di Internet Explorer e Windows Media Player su Windows — esclude Netscape e Sun.",
+    "Google Shopping (2017): la Commissione infligge 2,4 miliardi di euro di multa per aver falsato le pagine di ricerca privilegiando il proprio comparatore.",
+    "AGCM vs Google/Enel JuicePass: Google rifiuta di accettare l'app Enel JuicePass su Android Auto, favorendo Google Maps — sanzionato per abuso di posizione dominante.",
+   ]},
+  {n:24, t:"Collusione algoritmica — comportamenti paralleli — Tompkins / Eturas",
+   def:[
+    "Il diritto antitrust punisce i cartelli (accordi collusivi espliciti) ma ritiene leciti i 'comportamenti paralleli' (scelte autonome convergenti in un oligopolio).",
+    "La collusione algoritmica rende obsoleto questo confine formale: algoritmi di monitoring e signaling coordinano i prezzi istantaneamente senza alcun incontro fisico.",
+    "Il test di 'consapevolezza' nell'adottare l'algoritmo come strumento di coordinamento è ora il cuore del giudizio antitrust.",
+   ],
+   arg:[
+    "Monitoring algorithms: aggiornano i prezzi in tempo reale monitorando i concorrenti — instaurano cartelli stabili senza che i manager si siano mai incontrati.",
+    "Signaling algorithms: trasmettono ai concorrenti le proprie intenzioni di prezzo, consentendo il coordinamento tacito.",
+    "L'ironia: l'automatismo abbassa il prezzo per ciascuna singola impresa, ma l'effetto aggregato è il cartello più efficiente della storia.",
+   ],
+   caso:[
+    "US v. Tompkins (2015): i venditori di poster su Amazon avevano adottato segretamente lo stesso algoritmo di terze parti per fissare prezzi massimi garantiti.",
+    "Il DOJ ha sventato l'illusione che l'assenza di un accordo umano esplicito escluda la collusione: l'adozione consapevole dell'algoritmo è l'accordo.",
+    "Caso Eturas (CGUE C-74/14): software agenzie di viaggio con tetto massimo agli sconti — la CGUE delinea i confini della 'consapevolezza' nell'adozione tecnica.",
+   ]},
+  {n:25, t:"Digital Markets Act (DMA) — obblighi del Gatekeeper",
+   def:[
+    "Il DMA (Reg. UE 2022/1925) ribalta il paradigma antitrust: interviene ex ante con obblighi preventivi, senza attendere che il monopolio si consolidi.",
+    "È Gatekeeper chi: ha fatturato UE > 7,5 miliardi o capitalizzazione > 75 miliardi + eroga servizi di piattaforma a > 45 milioni di utenti finali e 10.000 utenti commerciali per 3 anni.",
+    "Obblighi self-executing (art. 5): immediatamente applicabili, senza necessità di ulteriore specificazione — il Gatekeeper non può negoziare.",
+   ],
+   arg:[
+    "Art. 5 vieta: clausole MFN (che impedivano ai venditori di offrire prezzi diversi su altri canali), tying, data grabbing tra servizi senza consenso.",
+    "Art. 6 impone: interoperabilità, accesso ai dati publicitari per inserzionisti, portabilità dei dati, no self-preferencing.",
+    "Il DMA come risposta alla lentezza dell'antitrust: le sanzioni ex post arrivavano dopo anni durante i quali il monopolio si era consolidato irrimediabilmente.",
+   ],
+   caso:[
+    "Gatekeeper designati: Alphabet (Google), Amazon, Meta, Apple, ByteDance (TikTok), Microsoft.",
+    "La Commissione ha poteri di intervento straordinari: atti delegati, atti di esecuzione, sanzioni strutturali fino allo smembramento dell'impresa.",
+    "Il DMA non richiede la prova dell'abuso: le soglie quantitative creano una presunzione relativa che il Gatekeeper distorca la concorrenza.",
+   ]},
+  {n:26, t:"Capitalismo della sorveglianza (Zuboff) — Caso Dieselgate",
+   def:[
+    "Il capitalismo della sorveglianza (Zuboff): l'informazione comportamentale umana (clic, accessi, preferenze) diventa il 'nuovo petrolio' della produzione industriale.",
+    "I servizi 'gratis' non sono gratuiti: vengono concessi per tracciare e immagazzinare un 'surplus comportamentale' usato per prevedere e modificare il comportamento degli utenti.",
+    "Il modello di business: raccogliere dati → costruire modelli predittivi → vendere previsioni del comportamento agli inserzionisti.",
+   ],
+   arg:[
+    "Il Dieselgate dimostra l'inadeguatezza normativa: i controlli fisici tradizionali sono ciechi davanti alla manipolazione algoritmica del software.",
+    "Le normative della società analogica sono strutturalmente inadeguate a governare entità informatiche 'invisibili'.",
+    "Cambridge Analytica: la profilazione comportamentale non serve solo per la publicità — può alterare preferenze politiche e minacciare la democrazia.",
+   ],
+   caso:[
+    "Dieselgate (2015): Volkswagen introduce nel motore un software che riconosce il ciclo di prova delle emissioni e riduce le emissioni nocive durante il test.",
+    "Nella guida reale le emissioni erano fino a 40 volte superiori ai limiti legali: le autorità misuravano gas materiale, non potevano rilevare la manipolazione.",
+    "Il caso è il paradigma dell'inadeguatezza del diritto analogico: il software è il nuovo territorio della frode, invisibile agli strumenti di controllo tradizionali.",
+   ]},
+  {n:27, t:"Monopsonio — Gig Economy e mercato del lavoro",
+   def:[
+    "Il monopsonio è la struttura di mercato speculare al monopolio: un solo (o pochissimi) gigantesco acquirente sul versante della domanda, moltitudine di venditori.",
+    "Nella Gig Economy le piattaforme di delivery e trasporto costituiscono spesso un monopsonio geografico nel loro specifico raggio d'attività.",
+    "Il rider non ha potere negoziale: si trova faccia a faccia con l'unica piattaforma in grado di acquistargli il servizio — prendere o lasciare.",
+   ],
+   arg:[
+    "La piattaforma monopsonista comprime i salari al ribasso e scarica il rischio d'impresa sui lavoratori: costi di manutenzione, carburante, assicurazione.",
+    "L'esercito di sostituti sempre disponibili (disoccupati disposti ad accettare l'incarico) amplia il potere contrattuale della piattaforma.",
+    "Nella Silicon Valley: i patti di non concorrenza inter-aziendali hanno costruito un monopsonio coordinato sul mercato degli ingegneri informatici.",
+   ],
+   caso:[
+    "US v. Adobe/Apple/Google/Intel (DOJ, 2010): le aziende della Silicon Valley avevano siglato accordi segreti 'no poach' — non sottrarsi vicendevolmente ingegneri.",
+    "Il patto paralizzava la mobilità salariale degli ingegneri: impossibilitati a cambiare azienda per avere un salario migliore.",
+    "La California vieta i patti di non concorrenza — e non a caso ospita l'ecosistema tecnologico più dinamico e innovativo del mondo.",
+   ]},
+ ]},
+ {c:4, title:"I Contratti nei Mercati Digitali", qs:[
+  {n:28, t:"SSI vs servizio sottostante — disciplina applicabile",
+   def:[
+    "SSI (d.lgs. 70/2003): servizi immateriali forniti a distanza e per via elettronica — indipendentemente dal fatto che l'utente sia professionista o consumatore.",
+    "Servizio sottostante: la prestazione materiale (trasporto, alloggio, consegna) intermediata dalla piattaforma — disciplinata dalla normativa settoriale.",
+    "Il discrimine: la piattaforma che esercita 'influenza decisiva' sulla prestazione eroga materialmente il servizio sottostante e ne risponde direttamente.",
+   ],
+   arg:[
+    "Se l'utente è un consumatore, ai contratti SSI si sommano le tutele del Codice del Consumo — protezione rafforzata nelle transazioni B2C.",
+    "La disciplina del servizio sottostante varia settore per settore: normativa sui taxi, normativa alberghiera, normativa sulla sicurezza alimentare per il delivery.",
+    "La stessa piattaforma può erogare contemporaneamente SSI e servizio sottostante a seconda del grado di controllo esercitato sulla specifica prestazione.",
+   ],
+   caso:[
+    "Uber Spain (CGUE C-434/15, 2017): qualificato come servizio di trasporto → normativa comunale sui taxi applicabile → obbligo di licenza.",
+    "Airbnb Ireland (CGUE C-390/18, 2019): qualificato come SSI → non soggetto alla normativa alberghiera → nessun obbligo di licenza alberghiera.",
+    "Il criterio: Uber fissa le tariffe e controlla i driver (influenza decisiva); Airbnb non fissa i prezzi né costituisce il canale esclusivo per affittare.",
+   ]},
+  {n:29, t:"Click wrap / Browse wrap — clausole vessatorie — point and click",
+   def:[
+    "Click wrap: casella di spunta esplicita per accettare i termini d'uso — forma più garantista di accettazione nei contratti digitali.",
+    "Browse wrap: accettazione implicita per semplice scorrimento o uso del sito — la forma più debole, spesso contestata in giudizio.",
+    "Clausola vessatoria (art. 1341 c.c.): determina un significativo squilibrio a carico del consumatore → richiede doppia sottoscrizione specifica per essere valida.",
+   ],
+   arg:[
+    "Il 'point and click' è inidoneo a soddisfare il requisito della doppia sottoscrizione: non garantisce l'identificazione certa di chi ha cliccato.",
+    "L'unico strumento giuridicamente equiparabile alla firma analogica sarebbe la firma digitale qualificata — ma la sua imposizione sistematica paralizzerebbe l'e-commerce.",
+    "Le clausole approvate con solo click — specie quelle che escludono la responsabilità o impongono fori competenti lontani — rischiano la nullità in sede giudiziale.",
+   ],
+   caso:[
+    "Tribunale di Catanzaro (2012): eBay chiude l'account invocando una clausola di recesso unilaterale approvata con solo click.",
+    "Il Tribunale dichiara nulla la clausola: è una clausola vessatoria priva di valida doppia sottoscrizione — il semplice click non è sufficiente.",
+    "La conseguenza pratica: le clausole dei ToS che prevedono recesso unilaterale della piattaforma rischiano di essere nulle senza specifica approvazione scritta.",
+   ]},
+  {n:30, t:"Diritto di recesso ad nutum nei contratti digitali — PE Digital",
+   def:[
+    "Il recesso ad nutum (artt. 52 ss. Codice del Consumo) è il diritto irrinunciabile del consumatore di sciogliere un contratto B2C a distanza entro 14 giorni, senza motivazione e senza penali.",
+    "Si applica sia ai contratti a titolo oneroso sia ai contratti in cui la controprestazione è costituita da dati personali.",
+    "Se il professionista omette di informare sull'esistenza del diritto di recesso, il termine si estende automaticamente a 12 mesi.",
+   ],
+   arg:[
+    "La ratio: compensare l'asimmetria informativa nella contrattazione 'al buio' online — il consumatore non può valutare il prodotto prima dell'acquisto.",
+    "In caso di servizio 'parzialmente goduto': il professionista può trattenere solo la somma proporzionale al servizio effettivamente fruito — mai una penale forfettaria.",
+    "La proporzionalità stretta: il rimborso si calcola in rigida proporzione matematica al prezzo originale del contratto, non sulla base di valutazioni discrezionali.",
+   ],
+   caso:[
+    "PE Digital (CGUE C-641/19): un utente recede pochi giorni dopo essersi abbonato a un sito di incontri online, dopo aver già effettuato un test della personalità.",
+    "Il sito pretendeva di trattenere quasi l'intera somma a titolo di 'compensazione' per il servizio parzialmente goduto.",
+    "La CGUE vieta le penali forfettarie sproporzionate: il professionista può trattenere solo la somma calcolata in rigida proporzione al servizio parzialmente goduto.",
+   ]},
+  {n:31, t:"Il prosumer — professionista vs consumatore — Caso Kamenova",
+   def:[
+    "Il prosumer (producer + consumer): figura ibrida dell'economia di piattaforma che fonde produttore e consumatore — es. chi affitta su Airbnb o vende su eBay.",
+    "La distinzione è fondamentale: il consumatore gode delle tutele del Codice del Consumo; il professionista è soggetto solo al Codice Civile.",
+    "Criteri della Commissione UE: frequenza (non occasionale), volume d'affari (fatturato elevato), finalità di lucro (remunerazione che supera il rimborso costi).",
+   ],
+   arg:[
+    "La classificazione non dipende dalla struttura formale aziendale ma dalla sistematicità e dal fine di lucro dell'attività concretamente svolta.",
+    "Il rischio per la piattaforma: se l'utente viene classificato come professionista, l'acquirente gode di tutte le tutele del Codice del Consumo nei confronti della piattaforma.",
+    "Il prosumer in zona grigia: pubblica molti annunci ma non ha partita IVA — il giudice valuta caso per caso la realtà economica dell'attività.",
+   ],
+   caso:[
+    "Kamenova (CGUE C-105/17, 2018): una persona fisica pubblica 8 annunci di vendita di orologi usati su un sito web.",
+    "La CGUE stabilisce: il numero di annunci non determina automaticamente lo status professionale.",
+    "Occorre valutare concretamente: la sistematicità delle vendite, l'eventuale organizzazione strutturata, la presenza di un fine di lucro sistematico — non parametri formali.",
+   ]},
+  {n:32, t:"Disattivazione dell'account — risoluzione o recesso — Messina vs Catanzaro",
+   def:[
+    "La disattivazione dell'account può configurarsi come risoluzione per inadempimento (art. 1456 c.c.) se vi è una grave violazione delle regole della piattaforma.",
+    "Oppure come recesso unilaterale (art. 1373 c.c.) — che, in quanto clausola vessatoria, richiede la specifica doppia approvazione scritta per essere valido.",
+    "Il DSA (art. 7) introduce l'obbligo generale di motivazione per ogni restrizione all'account: fine dell'arbitrio unilaterale delle piattaforme.",
+   ],
+   arg:[
+    "La clausola di recesso unilaterale inserita nei ToS e approvata con click è una clausola vessatoria: potenzialmente nulla senza doppia sottoscrizione.",
+    "Se la chiusura è immotivata o per un inadempimento irrilevante, la piattaforma commette un recesso abusivo — risarcimento del danno.",
+    "Il DSA garantisce all'utente il diritto di accedere a un sistema interno di reclamo della piattaforma: procedura obbligatoria prima di adire il giudice.",
+   ],
+   caso:[
+    "Tribunale di Messina (2010): eBay chiude l'account per un modesto calo dei feedback → il Tribunale qualifica come 'risoluzione per inadempimento' ma la ritiene infondata.",
+    "Tribunale di Catanzaro (2012): stesso fatto, qualificato come 'recesso unilaterale abusivo' — la clausola risolutiva è nulla per mancanza di doppia sottoscrizione.",
+    "I due tribunali divergono sulla qualificazione ma convergono sul risultato: la chiusura arbitraria dell'account è giuridicamente contestabile.",
+   ]},
+  {n:33, t:"Gratuità e onerosità dei contratti digitali — dati come controprestazione — AGCM vs Facebook",
+   def:[
+    "Modello proprietario: i dati personali sono beni commerciabili, il loro conferimento configura una vera 'controprestazione' negoziale.",
+    "Modello personalistico (EDPB): i dati sono attributi fondamentali della personalità — il consenso è solo un'autorizzazione revocabile, non una prestazione economica.",
+    "Le nuove direttive UE estendono esplicitamente il Codice del Consumo ai contratti in cui la controprestazione è costituita da dati: il servizio non è 'gratuito'.",
+   ],
+   arg:[
+    "Un servizio ceduto in cambio di dati non è gratuito: l'utente paga con informazioni che hanno un preciso valore commerciale.",
+    "Lo sfruttamento massivo dei dati per finalità di publicità mirata trasforma il rapporto in un contratto oneroso, con tutte le conseguenti tutele consumeristiche.",
+    "Il corollario: il professionista che offre un servizio 'gratuito' in cambio di dati deve informare il consumatore del valore economico dello scambio.",
+   ],
+   caso:[
+    "AGCM v. Facebook (2018): l'Antitrust italiana sanziona Facebook per pratica commerciale scorretta.",
+    "Lo slogan 'È gratis e lo sarà sempre' è giudicato ingannevole: i dati utenti costituiscono un corrispettivo economico reale.",
+    "L'AGCM stabilisce che Facebook stava conducendo un'attività economica lucrativa basata sullo sfruttamento dei dati — il servizio non era gratuito.",
+   ]},
+  {n:34, t:"Regolamento P2B — clausole abusive B2B — Data Act",
+   def:[
+    "Il Regolamento P2B (Reg. UE 2019/1150): riequilibra le asimmetrie tra piattaforme e PMI imponendo obblighi di trasparenza e correttezza.",
+    "Obblighi P2B: pubblicazione e spiegazione dei parametri del ranking, preavviso di 15 giorni per modifiche contrattuali, 30 giorni per chiusura account con motivazione.",
+    "Il Data Act (Reg. UE 2023/2854) introduce per la prima volta nel diritto UE il concetto di clausola abusiva nel rapporto B2B digitale.",
+   ],
+   arg:[
+    "Le PMI accettano i ToS delle piattaforme in logica 'prendere o lasciare': il P2B riconosce questa asimmetria strutturale e la corregge con obblighi perentori.",
+    "Il ranking trasparente è essenziale: senza conoscerne i parametri, la PMI non può ottimizzare la propria visibilità e compete 'alla cieca'.",
+    "Il Data Act presume non vincolanti le clausole che consentono alla piattaforma di accedere ai dati aziendali della PMI per farle concorrenza.",
+   ],
+   caso:[
+    "Amazon Marketplace: i parametri del ranking erano segreti — il P2B ora impone la loro pubblicazione e comprensibilità per i venditori terzi.",
+    "Apple App Store come Gatekeeper DMA: commissioni unilaterali e regole opache — campo di applicazione privilegiato delle nuove norme sulla trasparenza B2B.",
+    "Data Act: la clausola che esclude la responsabilità della piattaforma per inadempimento grave verso la PMI è presuntivamente nulla come clausola abusiva.",
+   ]},
+  {n:35, t:"Difetto di conformità materiale e giuridica — beni smart — Direttiva 2019/771",
+   def:[
+    "La Direttiva 2019/771 (d.lgs. 170/2021) regola i 'beni con elementi digitali': beni mobili che incorporano un software senza il quale non potrebbero svolgere le loro funzioni.",
+    "Difetto di conformità materiale: include l'obsolescenza programmata — il venditore ha l'obbligo di fornire gli aggiornamenti necessari per tutta la vita utile ragionevolmente attesa.",
+    "Difetto di conformità giuridica: il software incorporato nel bene viola norme UE imperative (es. GDPR) — il bene è difettoso anche se funziona perfettamente.",
+   ],
+   arg:[
+    "L'obbligo di aggiornamento è continuativo: se il venditore cessa di rilasciare aggiornamenti di sicurezza prima del termine, il bene diventa legalmente difettoso.",
+    "La conformità giuridica allinea la vita digitale del prodotto alla sua vita fisica: non basta che il hardware funzioni se il software viola i diritti degli utenti.",
+    "I rimedi: ripristino della conformità, riduzione del prezzo, risoluzione del contratto — gli stessi rimedi del difetto materiale.",
+   ],
+   caso:[
+    "Smartwatch con app che raccoglie illecitamente dati sanitari in violazione del GDPR: bene affetto da difetto di conformità giuridica.",
+    "Il consumatore può richiedere il ripristino della conformità (aggiornamento del software), la riduzione del prezzo o la risoluzione del contratto.",
+    "Il caso dimostra come la Direttiva abbia esteso la tutela consumeristica dai difetti fisici ai difetti digitali, incluse le violazioni normative.",
+   ]},
+  {n:36, t:"Natura giuridica degli Smart Contract — tesi contrattualista vs non contrattualista",
+   def:[
+    "Gli Smart Contract sono accordi tradotti in codice informatico e registrati su blockchain, che si eseguono automaticamente al verificarsi di condizioni oggettive predeterminate.",
+    "Tesi non contrattualista: si tratta di procedure computazionali automatizzate prive di testo linguistico — impossibile rilevare patologie del consenso (errore, dolo, violenza).",
+    "Tesi contrattualista (prevalente): il consenso si forma 'a monte', nella programmazione e nell'accettazione dell'interfaccia — il codice regola solo l'adempimento.",
+   ],
+   arg:[
+    "L'analogia della vending machine: chi acquista una bevanda da un distributore automatico non negozia verbalmente, ma il contratto si perfeziona lo stesso.",
+    "Lo stesso vale per lo Smart Contract: accettando di interfacciarsi con il protocollo crittografico, si forma il consenso giuridico 'a monte'.",
+    "L'automatismo del codice riguarda esclusivamente la fase di esecuzione, non quella di formazione del contratto — le patologie del consenso si valutano al momento dell'accettazione.",
+   ],
+   caso:[
+    "La vending machine (distributore automatico) è l'analogia canonica: inserisci soldi, premi il tasto, ricevi il prodotto — contratto perfetto senza parole.",
+    "Nello Smart Contract: l'utente che accetta il protocollo crittografico presta un consenso 'a monte' alla prestazione che sarà eseguita automaticamente.",
+    "L'automatismo dell'adempimento (trasferimento di criptovaluta) è tecnicamente inarrestabile, ma non esclude la possibilità di contestare il contratto per vizi del consenso formatosi a monte.",
+   ]},
+  {n:37, t:"Bitcoin come moneta — classificazione BCE — diritto di credito",
+   def:[
+    "Le tre funzioni classiche della moneta: mezzo di scambio (accettata per beni), misura di valori (esprime relazioni di cambio), riserva di liquidità (strumento di capitalizzazione).",
+    "La BCE (2015) e il d.lgs. 90/2017 escludono che il Bitcoin possa essere inteso come moneta: è qualificato come 'rappresentazione digitale di valore'.",
+    "Il Bitcoin non è emesso da una Banca Centrale statale e il suo valore non è garantito da riserve: fluttua esclusivamente in base al mining e alla speculazione.",
+   ],
+   arg:[
+    "Il Bitcoin non è moneta a corso legale: nessun soggetto è obbligato ad accettarlo in pagamento — l'accettazione è solo volontaria.",
+    "Tesi alternativa: il Bitcoin come 'diritto di credito' — il possessore è creditore del protocollo di rete, non proprietario di un bene materiale.",
+    "La classificazione BCE in tre categorie: utility token (accesso a servizio), investment token (assimilabile a strumento finanziario), exchange/payment token (come il Bitcoin).",
+   ],
+   caso:[
+    "BCE e d.lgs. 90/2017: il Bitcoin è una 'rappresentazione digitale di valore' — non moneta, ma non priva di rilevanza giuridica.",
+    "La classificazione BCE fornisce il quadro: utility token, investment token, exchange token (o payment token) — ciascuno con disciplina diversa.",
+    "La tesi del 'servizio telematico': chi possiede Bitcoin è titolare di un diritto di credito verso i nodi della rete che gestiscono il deposito e le transazioni.",
+   ]},
+  {n:38, t:"Prezzi personalizzati/dinamici — Direttiva Omnibus",
+   def:[
+    "I prezzi personalizzati: la piattaforma usa machine learning e Big Data per profilare ogni singolo utente ed estrarne il 'prezzo di riserva' — la somma massima che è disposto a pagare.",
+    "I prezzi dinamici: variano in base alla domanda aggregata in tempo reale (es. surge pricing Uber) — non dipendono dal profilo individuale dell'utente.",
+    "La Direttiva Omnibus (2019/2161): obbligo di informare il consumatore ogni volta che il prezzo mostrato è stato personalizzato su base algoritmica.",
+   ],
+   arg:[
+    "La personalizzazione algoritmica genera asimmetria informativa letale: l'utente non sa che il prezzo è stato ricalcolato appositamente contro di lui.",
+    "L'utente perde ogni possibilità di comparazione oggettiva: la cifra mostrata a schermo è stata gonfiata appositamente per quel profilo specifico.",
+    "L'omissione dell'informazione invalida la correttezza del consenso: è pratica commerciale ingannevole ex Direttiva Omnibus.",
+   ],
+   caso:[
+    "Amazon varia i prezzi milioni di volte al giorno per categoria e profilo utente — il prezzo che vedi dipende da chi sei e da cosa hai cercato in precedenza.",
+    "Uber surge pricing: prezzi dinamici comunicati esplicitamente — legittimi perché trasparenti, a differenza dei prezzi personalizzati nascosti.",
+    "La Direttiva Omnibus mira specificamente ai prezzi personalizzati nascosti: obbliga a comunicare 'questo prezzo è stato personalizzato per te su base algoritmica'.",
+   ]},
+  {n:39, t:"Sharing Economy — condivisione beni materiali — proprietà",
+   def:[
+    "La Sharing Economy è l'ecosistema economico in cui la circolazione dei beni avviene attraverso la condivisione e l'accesso temporaneo, non solo il trasferimento della proprietà.",
+    "Condizioni economiche per la sharing economy: il bene deve essere 'diffuso' (facilmente reperibile a prezzo accessibile) e deve avere 'capacità in eccesso'.",
+    "La Sharing Economy non segna la fine della proprietà privata: al contrario, la presuppone strutturalmente.",
+   ],
+   arg:[
+    "Senza proprietà privata del veicolo o dell'immobile, BlaBlaCar o Airbnb non esisterebbero: il proprietario cede l'uso temporaneo, non il diritto dominicale.",
+    "Il 'detentore qualificato': chi accede al servizio acquisisce un diritto di godimento limitato nel tempo su funzionalità specifiche — non la proprietà.",
+    "La piattaforma gestisce l'incontro tra chi ha capacità in eccesso e chi ne ha bisogno: abbatte i costi di transazione rendendo economicamente sostenibile la condivisione.",
+   ],
+   caso:[
+    "BlaBlaCar: il proprietario privato del veicolo condivide il tragitto cedendo temporaneamente la capacità in eccesso dei posti auto.",
+    "Airbnb: il proprietario dell'immobile affitta temporaneamente lo spazio non utilizzato — condivisione della capacità in eccesso dell'abitazione.",
+    "Uber: il caso più complesso — la piattaforma esercita influenza decisiva sulla prestazione, rendendo problematica la classificazione come mera condivisione.",
+   ]},
+ ]},
+ {c:5, title:"La Proprietà nei Mercati Digitali", qs:[
+  {n:40, t:"Beni rivali/non rivali — escludibili — tragedia dei beni comuni",
+   def:[
+    "Bene rivale: il consumo da parte di uno riduce la disponibilità per altri (es. una mela, un posto a sedere). Non rivale: il consumo non riduce la disponibilità (es. un'idea, un file musicale).",
+    "Bene escludibile: è possibile impedire fisicamente o tecnicamente l'uso a chi non paga. Non escludibile: è impossibile impedirlo tecnicamente.",
+    "I beni immateriali della conoscenza nascono naturalmente come beni non rivali: milioni possono usarli simultaneamente senza consumarli.",
+   ],
+   arg:[
+    "La proprietà intellettuale crea escludibilità artificiale su beni intrinsecamente non rivali: incentivo alla creazione vs. accesso libero alla conoscenza — tensione strutturale.",
+    "La tragedia dei beni comuni (Hardin, 1967): i beni rivali non escludibili vengono sovra-sfruttati fino alla distruzione (il pascolo comune).",
+    "I beni immateriali sono immuni alla tragedia dei beni comuni: essendo non rivali, l'accesso di milioni non li consuma né li distrugge.",
+   ],
+   caso:[
+    "Garrett Hardin (1967): ogni pastore aggiunge pecore al pascolo comune fino a distruggerlo — la logica del free rider distrugge il bene collettivo.",
+    "Wikipedia: immune alla tragedia perché non rivale — miliardi di accessi non consumano né deteriorano l'enciclopedia, al contrario la migliorano.",
+    "Il paradosso della PI: l'escludibilità artificiale crea incentivi alla creazione ma frena la diffusione di beni che sarebbero naturalmente abbondanti.",
+   ]},
+  {n:41, t:"Dal Copyright al Copyleft — GPL — Creative Commons",
+   def:[
+    "Il copyright conferisce un'esclusiva proprietaria: riproduzione, modifica e distribuzione vietate senza autorizzazione.",
+    "Il copyleft usa il diritto d'autore al contrario: il creatore sfrutta le norme sul copyright per garantire — anziché limitare — libertà d'uso, modifica e ridistribuzione.",
+    "La GPL (Stallman): clausola 'virale' — chi modifica il codice deve rilasciare le migliorie con la stessa licenza, impedendo la privatizzazione dei miglioramenti.",
+   ],
+   arg:[
+    "La clausola virale della GPL impedisce la privatizzazione delle migliorie: il codice migliorato deve rimanere libero.",
+    "Le licenze Creative Commons (Lessig) estendono la logica del copyleft alle opere creative: moduli combinabili BY (attribuzione), SA (share alike), NC (non commercial), ND (no derivative).",
+    "Le CC incorporano un 'digital code': metadati leggibili dai motori di ricerca inglobati nel file, che viaggiano con l'opera ovunque essa vada.",
+   ],
+   caso:[
+    "Linux: sistema operativo GPL costruito interamente dalla community — oggi il principale sistema operativo usato a livello server globale.",
+    "Wikipedia: licenza CC BY-SA — chiunque riusi i contenuti deve attribuire la fonte e condividere le modifiche con la stessa licenza.",
+    "Entrambi i casi dimostrano che il copyleft non è un ostacolo all'innovazione ma uno strumento per garantire che l'innovazione rimanga accessibile a tutti.",
+   ]},
+  {n:42, t:"Lo statuto del file digitale — licenza d'uso — Caso 1984 Amazon",
+   def:[
+    "Acquistare un file digitale non trasferisce la proprietà: si ottiene solo una licenza d'uso, cioè il diritto di usarlo secondo i termini stabiliti unilateralmente dal licenziante.",
+    "I poteri dominicali compressi: il titolare del file non può cederlo, sublicenziarlo, rivenderlo né prestarlo — è un 'detentore qualificato', non un proprietario.",
+    "I ToS + DRM combinati eliminano tutti i diritti tipici della proprietà: ius excludendi, fruendi e disponendi vengono sistematicamente svuotati.",
+   ],
+   arg:[
+    "Il fornitore mantiene controllo assoluto sull'uso post-vendita: può modificare unilateralmente i termini, sospendere il servizio o cancellare l'accesso.",
+    "La piattaforma cloud si riserva il diritto di analizzare automaticamente i file archiviati: chi usa il cloud non può escludere il fornitore dal proprio 'spazio'.",
+    "La compressione dei diritti è strutturale: il modello economico della piattaforma dipende dal mantenimento del controllo post-vendita.",
+   ],
+   caso:[
+    "Amazon Kindle (2009): Amazon cancella da remoto il romanzo '1984' di George Orwell dalle librerie virtuali di ignari acquirenti.",
+    "Acertato un problema di diritti d'autore, Amazon agisce unilateralmente: gli utenti si svegliano con il libro scomparso dal loro dispositivo.",
+    "La class action che ne seguì ha dimostrato plasticamente che acquistare un e-book equivale a licenziarsi un accesso revocabile, non a possedere il libro.",
+   ]},
+  {n:43, t:"Esaurimento del diritto di distribuzione — UsedSoft / Tom Kabinet",
+   def:[
+    "Principio di esaurimento: dopo la prima vendita autorizzata il titolare del copyright perde il controllo sulla successiva circolazione di quell'esemplare.",
+    "La questione centrale: il principio si applica ai file digitali trasmessi online?",
+    "Il discrimine CGUE: 'distribuzione' (si esaurisce) vs. 'comunicazione al pubblico' (non si esaurisce e richiede sempre l'autorizzazione).",
+   ],
+   arg:[
+    "La ratio economica: un file digitale è un sostituto perfetto della copia nuova — autorizzare la rivendita distruggerebbe il mercato primario dell'editore.",
+    "Per il software: la permanenza della licenza e il pagamento unico (una tantum) lo equipara economicamente alla compravendita materiale → esaurimento applicabile.",
+    "Per gli e-book: la trasmissione online è 'comunicazione al pubblico', non distribuzione → il diritto non si esaurisce → no mercato dell'usato digitale.",
+   ],
+   caso:[
+    "UsedSoft (CGUE C-128/11, 2012): il download permanente di un programma con licenza una tantum equivale a una compravendita → diritto di distribuzione esaurito → software usato rivendibile.",
+    "Tom Kabinet (CGUE C-263/18, 2019): la trasmissione di e-book è 'comunicazione al pubblico', non 'distribuzione' → diritto non si esaurisce → e-book usati non rivendibili.",
+    "La distinzione: software (utilità funzionale permanente, sostituto perfetto) vs. e-book (opera creativa, ogni trasmissione è una nuova comunicazione al pubblico).",
+   ]},
+  {n:44, t:"NFT — infungibilità — scarcità artificiale",
+   def:[
+    "NFT (Non-Fungible Token): asset digitale univoco e non replicabile, registrato su blockchain tramite Smart Contract.",
+    "Infungibile: ciascun NFT è identificato da un codice unico che lo differenzia da ogni altro token — non intercambiabile come le banconote.",
+    "Scarcità artificiale: l'NFT reintroduce il concetto fisico della scarcità in un ambiente digitale strutturalmente caratterizzato dall'abbondanza.",
+   ],
+   arg:[
+    "Chiunque può copiare e scaricare il file jpeg: l'NFT certifica solo la 'titolarità' di quella specifica istanza — non conferisce esclusiva d'uso.",
+    "Token nativo: opera digitale originale creata appositamente come NFT — potenzialmente tutelabile anche da diritto d'autore.",
+    "Token non nativo: tokenizzazione di opera fisica preesistente — si trasferisce il token, non i diritti sull'opera originale.",
+   ],
+   caso:[
+    "'Everydays: The First 5000 Days' di Beeple: venduto da Christie's per 69 milioni di dollari — il più costoso NFT della storia.",
+    "Chi acquista l'NFT ottiene un certificato digitale di titolarità su blockchain, non l'opera in sé.",
+    "Beeple ha conservato il copyright: può ancora riprodurre, vendere e sfruttare commercialmente l'opera — l'acquirente dell'NFT non ha acquisito diritti di esclusiva.",
+   ]},
+  {n:45, t:"L'eredità digitale — account — Yahoo! / Facebook BGH",
+   def:[
+    "L'eredità digitale: le sorti dei beni informatici immateriali (account social, caselle email, file cloud, criptovalute) alla morte del titolare.",
+    "Il principio civile: l'erede subentra nei rapporti contrattuali di natura patrimoniale — ma i ToS delle piattaforme USA inseriscono clausole di intrasmissibilità e cancellazione automatica.",
+    "Il conflitto: diritto degli eredi a subentrare patrimonialmente vs. diritto alla riservatezza dei terzi che hanno comunicato con il defunto.",
+   ],
+   arg:[
+    "L'account social non ha carattere personalissimo come il diritto al voto: contiene beni patrimoniali (foto, ricordi) trasmissibili agli eredi.",
+    "La chiave del BGH tedesco: l'account è equiparato a un 'diario personale' — rapporto contrattuale trasmissibile perché non personalissimo.",
+    "I ToS americani di intrasmissibilità non possono prevalere sul diritto successorio europeo: la questione si gioca sul conflitto tra legge del contratto e legge successoria.",
+   ],
+   caso:[
+    "Caso Yahoo! (USA, 2004): accesso negato alla famiglia del marine ucciso in Iraq — i ToS prevedevano la cancellazione dell'account alla morte.",
+    "BGH Germania (2018): i genitori ottengono accesso all'account Facebook della figlia deceduta in metropolitana.",
+    "Il BGH equipara l'account a un diario personale: il rapporto contrattuale con Facebook è trasmissibile agli eredi, al pari di una cassetta di sicurezza fisica.",
+   ]},
+  {n:46, t:"Successione negli asset digitali — art. 2-terdecies d.lgs. 101/2018 — Apple iCloud",
+   def:[
+    "L'art. 2-terdecies del d.lgs. 101/2018 (adeguamento italiano al GDPR): i diritti relativi ai dati personali di un defunto possono essere esercitati da chi ha un interesse proprio o ragioni familiari meritevoli di protezione.",
+    "Il fondamento non è il diritto successorio classico ma il diritto alla protezione dei dati: chi agisce non subentra nel contratto ma esercita autonomi diritti sui dati.",
+    "Limite: l'accesso è precluso solo se il defunto aveva espresso in vita un divieto formale, specifico e scritto alla trasmissione.",
+   ],
+   arg:[
+    "Le clausole dei ToS accettate genericamente con click non costituiscono un valido 'divieto preventivo': serviva una richiesta specifica e inequivocabile della piattaforma.",
+    "Le 'ragioni familiari meritevoli di protezione' sono una categoria giuridica aperta: recuperare la memoria digitale del familiare vi rientra pienamente.",
+    "L'art. 2-terdecies bypassa le clausole americane di intrasmissibilità: il diritto italiano consente l'accesso ai dati anche contro la volontà della piattaforma.",
+   ],
+   caso:[
+    "Casi Apple iCloud (2021-2022): Tribunali di Milano, Bologna e Roma intimano ad Apple di consentire l'accesso ai genitori di figli deceduti.",
+    "Apple rifiutava citando le policy statunitensi: i giudici italiani ordinano l'accesso applicando l'art. 2-terdecies.",
+    "Il recupero della memoria familiare (foto, video, messaggi) rientra tra le 'ragioni familiari meritevoli di protezione' contro cui ogni clausola contrattuale deve retrocedere.",
+   ]},
+ ]},
+ {c:6, title:"Responsabilità del Provider e Intelligenza Artificiale", qs:[
+  {n:47, t:"Il regime speciale del DSA — responsabilità intermediari — esonero hosting",
+   def:[
+    "Il DSA (Reg. UE 2022/2065) aggiorna la Direttiva 2000/31/CE e prevede un regime speciale di esonero dalla responsabilità civile, penale e amministrativa per i provider di servizi intermediari.",
+    "Tre categorie: access provider (art. 4, mere conduit), cache provider (art. 5, caching) e host provider (art. 6, hosting) — con condizioni di esonero crescentemente stringenti.",
+    "Il principio unificante: il provider beneficia dell'esonero solo se il suo intervento è puramente automatico, passivo e neutro — privo di qualsiasi controllo editoriale.",
+   ],
+   arg:[
+    "L'host provider (art. 6): le condizioni di esonero sono alternative — o non è effettivamente a conoscenza dell'illiceità, oppure agisce immediatamente per rimuovere il contenuto.",
+    "La 'clausola del buon samaritano' (art. 7 DSA): i controlli volontari pro-attivi del provider non gli fanno perdere la qualifica di fornitore neutro.",
+    "Il DSA uniforma a livello europeo la frammentazione normativa nazionale creatasi dai diversi recepimenti della Direttiva 2000/31/CE.",
+   ],
+   caso:[
+    "Glawischnig-Piesczek v. Facebook (CGUE C-18/18, 2019): il giudice può ordinare la rimozione di contenuti 'identici o equivalenti' a un contenuto diffamatorio già individuato.",
+    "La condizione: l'equivalenza deve essere rilevabile tramite strumenti automatizzati senza imporre alla piattaforma un'autonoma valutazione giuridica.",
+    "Il caso segna il limite: la piattaforma può essere obbligata a rimuovere il 'clone' del contenuto illecito, ma non a svolgere sorveglianza generalizzata e preventiva.",
+   ]},
+  {n:48, t:"Assenza del dovere generale di sorveglianza — SABAM / Telekabel / Glawischnig",
+   def:[
+    "Art. 8 DSA: i prestatori di servizi intermediari non sono soggetti a un obbligo generale di monitoraggio delle informazioni che trasmettono o memorizzano.",
+    "Sono ammessi solo doveri di controllo specifici e mirati, imposti dall'autorità giudiziaria su contenuti già individuati come illeciti.",
+    "Un obbligo generale di filtraggio massiccio violerebbe la libertà d'impresa del provider e comprimerebbe sproporzionatamente riservatezza e libertà di espressione degli utenti.",
+   ],
+   arg:[
+    "Il bilanciamento CGUE: tra tutela della proprietà intellettuale e libertà di espressione, né l'una né l'altra può prevalere in modo assoluto — serve proporzionalità.",
+    "La clausola del buon samaritano (art. 7 DSA): i controlli volontari pro-attivi per rimuovere illeciti non fanno perdere l'esonero — incentivo a comportamenti virtuosi.",
+    "La 'conoscenza effettiva' dell'illecito — non la mera possibilità tecnica di scoprirlo — è la soglia che fa scattare l'obbligo di rimozione per l'host provider.",
+   ],
+   caso:[
+    "SABAM v. Netlog (CGUE C-360/10): no filtro preventivo generale per i social network — la CGUE esclude l'obbligo di sorveglianza attiva.",
+    "UPC Telekabel Wien (CGUE C-314/12): un ISP può essere destinatario di ordini di blocco specifici, ma non può essere costretto a installare filtri generali su tutto il traffico.",
+    "Glawischnig-Piesczek v. Facebook (CGUE C-18/18): ammessa la rimozione di contenuti 'identici o equivalenti' senza valutazione giuridica autonoma della piattaforma.",
+   ]},
+  {n:49, t:"Fornitura neutra vs hosting attivo — Louis Vuitton v. Google / L'Oréal v. eBay",
+   def:[
+    "Hosting neutro (o passivo): il provider opera in modo automatico, tecnico e privo di qualsiasi conoscenza o controllo sui contenuti — beneficia dell'esonero DSA.",
+    "Hosting attivo: la piattaforma svolge attività di selezione, organizzazione o promozione dei contenuti per trarne un vantaggio commerciale — perde l'esonero e diventa corresponsabile.",
+    "Il Considerando 22 DSA: il semplice impiego di funzioni di ricerca o indicizzazione automatizzata non basta di per sé a far perdere la neutralità.",
+   ],
+   arg:[
+    "Il test concreto: il provider ha esercitato un controllo editoriale o un'ingerenza consapevole sui contenuti per ricavarne un vantaggio commerciale?",
+    "La 'clausola del buon samaritano' (art. 7 DSA): i controlli volontari proattivi per rimuovere illeciti non fanno perdere l'esonero — anzi sono incentivati.",
+    "L'hosting attivo rompe la neutralità: la piattaforma non è più un mero condotto tecnico ma un editore che seleziona e promuove i contenuti — stesso regime di responsabilità.",
+   ],
+   caso:[
+    "Louis Vuitton v. Google (CGUE C-236/08, 2010): AdWords memorizza le parole chiave in modo automatico senza controllo editoriale → hosting neutro → esonero confermato.",
+    "L'Oréal v. eBay (CGUE C-324/09, 2011): eBay promuoveva attivamente gli annunci, ottimizzando la presentazione per trarne vantaggio commerciale → hosting attivo → perde l'esonero.",
+    "Il contrasto tra i due casi fissa il discrimine: automatismo tecnico (Google) vs. ingerenza commerciale consapevole (eBay) = neutro vs. attivo.",
+   ]},
+  {n:50, t:"DSA — Notice and Take Down — VLOPs — rischi sistemici",
+   def:[
+    "Segnalazione qualificata (art. 9 DSA): proveniente da autorità giudiziaria o amministrativa competente — crea immediatamente l'obbligo di rimozione e l'esonero dalla responsabilità.",
+    "Segnalazione semplice (art. 16 DSA): inoltrata da qualsiasi utente — genera la 'conoscenza effettiva' dell'illecito, obbligando l'host provider ad agire tempestivamente.",
+    "VLOPs (Very Large Online Platforms): piattaforme con oltre 45 milioni di utenti attivi mensili nell'UE — soggette a obblighi aggiuntivi di risk management annuale.",
+   ],
+   arg:[
+    "Il DSA uniforma le procedure di rimozione a livello europeo: fine della frammentazione normativa creata dai diversi recepimenti nazionali della Direttiva 2000/31/CE.",
+    "I rischi sistemici delle VLOPs: diffusione virale di contenuti illegali, pregiudizi ai processi elettorali e democratici, danni alla salute mentale dei minori.",
+    "Il notice and stay-down: una volta rimosso su segnalazione, il provider deve impedire il ricaricamento futuro — obbligo di sorveglianza specifico e mirato.",
+   ],
+   caso:[
+    "Il regime notice and stay-down (Direttiva Copyright art. 17): rimozione + impedimento del ricaricamento — obbligo specifico e mirato, non sorveglianza generalizzata.",
+    "VLOPs: obbligati a valutare annualmente i rischi sistemici dei loro algoritmi e ad adottare misure di mitigazione proporzionate.",
+    "Accessibilità dei dati: le VLOPs devono consentire l'accesso ai propri dati a ricercatori accreditati per la valutazione indipendente dei rischi sistemici.",
+   ]},
+  {n:51, t:"Direttiva Copyright 2019/790 — diritti ancillari art. 15 — art. 17",
+   def:[
+    "Art. 15 Direttiva 2019/790: introduce i 'diritti ancillari' degli editori di stampa — gli aggregatori di notizie non possono riprodurre estratti (snippet) senza licenza.",
+    "Art. 17: le piattaforme di condivisione di contenuti compiono 'comunicazione al pubblico' quando memorizzano contenuti protetti caricati dagli utenti.",
+    "L'art. 17 ribalta l'onere probatorio: la piattaforma risponde direttamente per violazione del copyright, salvo dimostri di aver compiuto i 'massimi sforzi'.",
+   ],
+   arg:[
+    "I tre requisiti cumulativi dell'art. 17: aver tentato la licenza + aver compiuto massimi sforzi per impedire il caricamento + aver rimosso tempestivamente i contenuti segnalati.",
+    "L'art. 15 tutela l'investimento editoriale: i giornali non finanziano il giornalismo per arricchire gratuitamente Google News.",
+    "Il regime delle 'comunicazione al pubblico' trasforma le piattaforme di condivisione da hosting passive a editori corresponsabili.",
+   ],
+   caso:[
+    "YouTube investe miliardi nel sistema Content ID: strumento di 'massimi sforzi' per il filtraggio preventivo dei contenuti protetti caricati dagli utenti.",
+    "Google News negozia accordi commerciali con gli editori europei per rispettare l'art. 15 — o rischia sanzioni per ogni snippet riprodotto senza licenza.",
+    "La Direttiva ha trasformato le piattaforme: non più semplici fornitori di hosting neutro, ma soggetti che compiono 'comunicazione al pubblico' e rispondono come tali.",
+   ]},
+  {n:52, t:"'Massimi sforzi' art. 17 — filtraggio preventivo — Caso Polonia (C-401/19)",
+   def:[
+    "I 'massimi sforzi' dell'art. 17 impongono di fatto l'adozione di sistemi di filtraggio algoritmico preventivo sul caricamento dei contenuti.",
+    "Il rischio strutturale: gli algoritmi non distinguono la violazione illecita dall'uso lecito (parodia, critica, citazione, didattica) — censura automatizzata di contenuti legittimi.",
+    "La CGUE richiede come contrappeso: procedure di reclamo interne gestite da esseri umani, rapide ed efficaci, per il ripristino dei contenuti rimossi ingiustificatamente.",
+   ],
+   arg:[
+    "Il filtraggio preventivo generalizzato configura una sorveglianza attiva: in tensione con il divieto di obblighi generali di monitoraggio (art. 8 DSA).",
+    "Il bilanciamento proporzionato: tutela della proprietà intellettuale vs. libertà di espressione (art. 11 Carta UE) — nessuna può prevalere in modo assoluto.",
+    "Le procedure di reclamo umane sono la condizione di legittimità costituzionale del sistema: senza di esse, il filtraggio sarebbe censura incostituzionale.",
+   ],
+   caso:[
+    "Polonia v. Parlamento e Consiglio (CGUE C-401/19, 2022): la Polonia impugna l'art. 17 per violazione della libertà di espressione.",
+    "La CGUE respinge il ricorso: gli obblighi sono compatibili con la Carta a condizione che le piattaforme garantiscano procedure di reclamo umane efficaci.",
+    "Il Caso Polonia fissa il compromesso costituzionale: filtraggio preventivo ammesso + reclamo umano obbligatorio = equilibrio tra PI e libertà di espressione.",
+   ]},
+  {n:53, t:"Responsabilità art. 2049 c.c. — danni offline dei collaboratori della piattaforma",
+   def:[
+    "Art. 2049 c.c.: responsabilità solidale dei 'padroni e committenti' per i danni causati dai loro preposti — indipendentemente dalla qualificazione formale del contratto.",
+    "Il 'rapporto di preposizione' in senso materiale: effettivo potere di direzione e controllo sull'esecutore della prestazione — la forma contrattuale è irrilevante.",
+    "Se la piattaforma fissa le tariffe, assegna le corse, impone istruzioni vincolanti e irroga sanzioni disciplinari → esercita il potere di direzione che configura la preposizione.",
+   ],
+   arg:[
+    "La forma contrattuale (autonomo vs. dipendente) non conta: conta la sostanza del rapporto e l'effettivo potere di controllo esercitato dalla piattaforma.",
+    "Il corollario pratico: il danneggiato da un sinistro causato dal rider o dal driver può citare in giudizio la piattaforma come coobbligata solidale.",
+    "Il criterio dell'influenza decisiva (elaborato per distinguere SSI da servizio sottostante) è anche il criterio che determina la responsabilità ex art. 2049 c.c.",
+   ],
+   caso:[
+    "Uber Spain (CGUE C-434/15, 2017): Uber esercita influenza decisiva sui driver — assegna le corse, fissa le tariffe, controlla la condotta.",
+    "Sinistro causato dal conducente Uber: il danneggiato può citare Uber come coobbligata solidale ex art. 2049 c.c. — responsabilità diretta della piattaforma.",
+    "Airbnb Ireland: l'host mantiene piena autonomia organizzativa e tariffaria sul proprio immobile → no rapporto di preposizione → no responsabilità ex art. 2049 c.c.",
+   ]},
+  {n:54, t:"La Piramide del Rischio dell'AI Act — pratiche vietate (rischio inaccettabile)",
+   def:[
+    "L'AI Act struttura il proprio intervento normativo su una 'piramide del rischio' a quattro livelli: rischio inaccettabile (divieto assoluto), alto rischio, rischio specifico/limitato, rischio minimo/nullo.",
+    "Al vertice: i sistemi di IA con 'rischio inaccettabile' — incompatibili con i diritti fondamentali e i principi democratici dell'UE — soggetti a divieto assoluto.",
+    "Non possono essere immessi sul mercato, messi in servizio, né utilizzati all'interno dell'Unione: il divieto è categorico, senza eccezioni basate sul bilanciamento.",
+   ],
+   arg:[
+    "Il catalogo tassativo dei divieti: tecniche subliminali per distorcere il comportamento, sfruttamento delle vulnerabilità legate all'età o a disabilità fisiche/mentali.",
+    "Social scoring generalizzato da parte di soggetti pubblici: valutazione dei cittadini in base ai comportamenti sociali con conseguenze pregiudizievoli generalizzate.",
+    "Identificazione biometrica remota in tempo reale in spazi pubblici: vietata con rarissime deroghe preventivamente autorizzate dalla magistratura.",
+   ],
+   caso:[
+    "Il sistema di 'social scoring' cinese è il caso paradigmatico di pratica inaccettabile in Europa: valutazione del comportamento sociale dei cittadini con conseguenze pervasive.",
+    "Clearview AI: scraping biometrico da internet per costruire banche dati di riconoscimento facciale — pratica vietata dall'AI Act.",
+    "Riconoscimento facciale in spazi pubblici: solo se autorizzato preventivamente dalla magistratura per terrorismo, ricerca di vittime di sequestro o prevenzione di reati gravi.",
+   ]},
+  {n:55, t:"Sistemi AI ad alto rischio — requisiti tecnici obbligatori",
+   def:[
+    "I sistemi AI ad alto rischio non sono vietati: sono soggetti a un rigoroso iter normativo preventivo prima dell'immissione sul mercato.",
+    "Categorie: biometria, infrastrutture critiche, istruzione, occupazione, accesso a servizi essenziali, prevenzione di reati, migrazione, amministrazione della giustizia.",
+    "Soggetti obbligati: fornitore (sviluppa e immette), deployer (utilizza), importatore (introduce nell'UE), distributore (commercializza).",
+   ],
+   arg:[
+    "Obblighi tecnici: governance dei dati di training (accurati, privi di bias), documentazione tecnica, log di funzionamento, trasparenza verso le autorità di controllo.",
+    "La supervisione umana (human oversight) è il presidio giuridico centrale: una persona fisica deve sempre poter comprendere l'output, ignorarlo in caso di errore e spegnere il sistema (kill switch).",
+    "Solo dopo apposita valutazione di conformità il sistema riceve la marcatura CE — senza di essa non può essere immesso sul mercato europeo.",
+   ],
+   caso:[
+    "Selezione automatica dei CV: sistema ad alto rischio (settore occupazione) → la piattaforma è obbligata a offrire revisione umana al candidato scartato.",
+    "Scoring creditizio algoritmico: ad alto rischio (accesso a servizi finanziari essenziali) → l'istituto deve offrire revisione umana del diniego del mutuo.",
+    "Il kill switch non è una metafora: il sistema deve essere progettato per consentire fisicamente l'interruzione immediata del suo funzionamento da parte di un umano.",
+   ]},
+  {n:56, t:"AI Act — Modelli GPAI (LLM) — rischio sistemico — soglia FLOPs",
+   def:[
+    "I modelli GPAI (General Purpose AI): LLM come ChatGPT e Claude — dotati di 'generalità significativa', capaci di svolgere un'ampia gamma di compiti complessi.",
+    "Tutti i fornitori GPAI: obblighi di trasparenza sul dataset di training (rispetto del copyright) e pubblicazione di una sintesi dettagliata dei contenuti utilizzati.",
+    "Rischio sistemico: i modelli GPAI con addestramento cumulativo superiore a 10²⁵ FLOPs presentano capacità di impatto potenzialmente catastrofico.",
+   ],
+   arg:[
+    "La soglia di 10²⁵ FLOPs è la presunzione matematica del rischio sistemico: superata quella soglia, il modello è presunto comportare un rischio sistemico.",
+    "Obblighi aggiuntivi per i modelli a rischio sistemico: Red Teaming (simulazione di attacchi), monitoraggio incidenti gravi, condivisione informazioni con la Commissione.",
+    "La governance del rischio sistemico è un obbligo continuativo: non basta ottenere il via libera al momento del lancio — il monitoraggio è permanente.",
+   ],
+   caso:[
+    "GPT-4 (OpenAI) e Claude 3 Opus (Anthropic): modelli GPAI con potenziale rischio sistemico — soggetti agli obblighi più stringenti del Capo V AI Act.",
+    "Il Red Teaming obbligatorio: simulazione sistematica di attacchi e vulnerabilità per identificare i rischi prima che si materializzino nella realtà.",
+    "La condivisione di informazioni con la Commissione: i fornitori di modelli a rischio sistemico non possono gestire autonomamente gli incidenti gravi — devono notificarli.",
+   ]},
+  {n:57, t:"IA generativa — rischio specifico/limitato — deep fake — watermarking",
+   def:[
+    "I sistemi AI a rischio specifico o limitato non sono né vietati né ad alto rischio: sono soggetti a obblighi di trasparenza mirati.",
+    "Rientrano in questa categoria: chatbot (che simulano conversazioni umane) e generatori di contenuti sintetici — testi, immagini, audio, video e deep fake.",
+    "Deep fake: contenuti sintetici che replicano falsamente le fattezze, la voce o i comportamenti di una persona reale in modo non riconoscibile.",
+   ],
+   arg:[
+    "Obbligo del fornitore: marcare tecnicamente i contenuti sintetici con watermarking digitale — filigrana leggibile dalla macchina per rivelarne l'origine non umana.",
+    "Obbligo del deployer: etichettare esplicitamente l'output come 'generato da IA' — l'utente finale deve sapere con cosa sta interagendo.",
+    "Deroga: quando l'interazione artificiale è palesemente ovvia dal contesto (es. chatbot di assistenza clienti palesemente automatizzato).",
+   ],
+   caso:[
+    "Video deepfake di personaggi politici: obbligo di label visibili e watermarking tecnico — il pubblico deve poter verificare l'origine sintetica del contenuto.",
+    "Truffe via audio sintetico (clonazione vocale per estorcere denaro): violazione dell'obbligo di trasparenza — contenuto sintetico non marcato come tale.",
+    "Deepfake non-consensuali di persone private: violazione del GDPR (trattamento illecito dell'immagine) + violazione dell'AI Act (nessun watermarking).",
+   ]},
+  {n:58, t:"Direttiva prodotti difettosi 2024/2853 — black box algoritmica — danno immateriale",
+   def:[
+    "La Direttiva 2024/2853 aggiorna la responsabilità oggettiva del produttore (1985) per l'era digitale: estende 'prodotto' al software, ai file per stampa 3D e ai sistemi AI.",
+    "Introduce il 'danno immateriale': la distruzione o corruzione irreversibile di dati è risarcibile come danno patrimoniale.",
+    "Il problema della black box: per la vittima di un'IA è tecnicamente impossibile provare il difetto algoritmico senza accedere alla documentazione tecnica interna.",
+   ],
+   arg:[
+    "La soluzione normativa: il giudice può ordinare al produttore la 'divulgazione degli elementi di prova' (discovery) — esibizione forzata della documentazione tecnica riservata.",
+    "La presunzione relativa del nesso causale: se il sistema è opaco e il danno si è verificato nell'ambito del suo funzionamento, si presume il difetto — onere della prova si sposta sul produttore.",
+    "La presunzione abbatte l'asimmetria informativa: la grande impresa tecnologica non può più opporre la segretezza tecnica per sfuggire alla responsabilità.",
+   ],
+   caso:[
+    "Pedone investito da veicolo a guida autonoma: strutturalmente incapace di provare il difetto dell'algoritmo di guida — il codice è inaccessibile.",
+    "La Direttiva ordina al costruttore di produrre i log e la documentazione del sistema: la black box viene aperta per volontà del giudice.",
+    "La presunzione relativa: veicolo a guida autonoma + danno a pedone = difetto presunto del sistema AI → onere sul produttore di dimostrare il contrario.",
+   ]},
+ ]},
+ {c:7, title:"Il Regime Giuridico dei Dati Personali", qs:[
+  {n:59, t:"Dal diritto alla riservatezza al diritto all'autodeterminazione informazionale",
+   def:[
+    "Il diritto alla riservatezza (privacy difensiva): il diritto ad essere lasciati soli e a non subire intrusioni nella sfera personale.",
+    "Il diritto all'autodeterminazione informazionale: il potere attivo dell'individuo di controllare la circolazione delle informazioni che lo riguardano e di decidere consapevolmente sul loro utilizzo.",
+    "La Carta UE distingue espressamente: art. 7 (riservatezza) e art. 8 (protezione dei dati personali come diritto autonomo) — due diritti distinti con ambito di tutela diverso.",
+   ],
+   arg:[
+    "L'evoluzione è necessaria: nella società digitale la semplice segretezza non è più sufficiente — il conferimento dei dati è inevitabile per accedere a qualsiasi servizio.",
+    "Il diritto non mira più a nascondere l'informazione, ma a garantire la trasparenza del trattamento: chi raccoglie i dati deve rispettare la finalità dichiarata, minimizzare la raccolta e garantire la sicurezza.",
+    "Il principio dell'autodeterminazione informazionale è il fondamento dell'intero edificio del GDPR: l'individuo ha il diritto di sapere chi conosce cosa su di lui.",
+   ],
+   caso:[
+    "Sentenza sul Censimento (Corte Costituzionale Federale Tedesca, 1983): una legge imponeva la raccolta massiva di dati sui cittadini per finalità censuarie.",
+    "La Corte la dichiara incostituzionale: in una democrazia i cittadini devono poter determinare 'chi conosce cosa su di essi'.",
+    "Il timore di una sorveglianza permanente ostacolerebbe l'esercizio delle libertà civili e politiche — la privacy non è un lusso ma la condizione della libertà.",
+   ]},
+  {n:60, t:"Principi cardine del GDPR — accountability — Privacy by design e by default",
+   def:[
+    "Art. 5 GDPR: liceità, correttezza e trasparenza; limitazione della finalità; minimizzazione dei dati; esattezza; limitazione della conservazione; integrità e riservatezza; responsabilizzazione (accountability).",
+    "Il principio di accountability: il titolare deve adottare misure adeguate E dimostrare proattivamente la conformità — l'onere della prova è a carico di chi tratta i dati.",
+    "Privacy by design (art. 25): i requisiti di protezione devono essere integrati fin dalla fase di ideazione e progettazione del sistema, non aggiunti ex post.",
+   ],
+   arg:[
+    "Privacy by default: per impostazione predefinita il sistema tratta solo i dati strettamente necessari per la finalità specifica — nessuna raccolta eccedente.",
+    "Il Registro dei Trattamenti (art. 30): espressione pratica dell'accountability — mappa di tutte le attività di trattamento, disponibile per le autorità di controllo.",
+    "Non avere un Registro aggiornato o una documentazione adeguata delle misure di sicurezza adottate è già di per sé una violazione del principio di accountability.",
+   ],
+   caso:[
+    "La violazione dell'accountability non richiede un data breach: basta non poter dimostrare di aver adottato misure tecniche e organizzative adeguate.",
+    "Privacy by design applicata ai sistemi AI: i requisiti di protezione dati devono essere ingegnerizzati nell'architettura stessa del sistema, non aggiunti come patch.",
+    "La Commissione può irrogare sanzioni fino al 4% del fatturato mondiale annuo per violazioni dei principi fondamentali dell'art. 5 — la più grave categoria di violazione.",
+   ]},
+  {n:61, t:"Basi giuridiche del trattamento — 'Consenti o Paga' — Orange România",
+   def:[
+    "Art. 6 GDPR: sei basi giuridiche tassative che rendono lecito il trattamento — consenso, necessità contrattuale, obbligo legale, interesse vitale, interesse pubblico, legittimo interesse.",
+    "Il consenso deve essere libero, informato, specifico per ciascuna finalità e manifestato in modo inequivocabilmente attivo — no silenzio, no caselle pre-spuntate.",
+    "La necessità contrattuale (lett. b): il trattamento deve essere obiettivamente indispensabile all'esecuzione del contratto — non basta che sia utile o vantaggioso per il titolare.",
+   ],
+   arg:[
+    "Il modello 'Consenti o Paga': l'utente sceglie tra accettare il tracciamento pubblicitario o pagare un abbonamento — il consenso è strutturalmente non libero per le piattaforme dominanti.",
+    "L'EDPB (Parere 8/2024): per le piattaforme in posizione dominante il modello non garantisce libertà del consenso — la costrizione economica è incompatibile con la genuinità.",
+    "L'interesse legittimo (lett. f): richiede un bilanciamento caso per caso — particolarmente rigoroso per i titolari dominanti che comprimono strutturalmente la libertà di scelta dell'utente.",
+   ],
+   caso:[
+    "Orange România (CGUE C-61/19, 2020): l'operatore inserisce il consenso al trattamento dati nel contratto con caselle pre-selezionate.",
+    "La CGUE stabilisce: consenso non valido se pre-selezionato o se il rifiuto impedisce la stipula del contratto.",
+    "Il principio: il consenso deve essere un atto attivo e genuino — non può essere estorto come condizione per accedere a un servizio di cui si ha bisogno.",
+   ]},
+  {n:62, t:"Diritto alla cancellazione vs diritto alla deindicizzazione — Caso Google Spain",
+   def:[
+    "Diritto alla cancellazione (art. 17 GDPR, 'diritto all'oblio'): eliminazione fisica dei dati dal sistema del titolare quando vengono meno i presupposti di legittimità del trattamento.",
+    "Diritto alla deindicizzazione: il motore di ricerca rimuove i link all'informazione dal proprio indice — ma la notizia originale rimane intatta sul sito dell'editore.",
+    "La deindicizzazione è una soluzione intermedia di bilanciamento: tutela la riservatezza senza censurare la storia o il giornalismo.",
+   ],
+   arg:[
+    "Il bilanciamento non è assoluto: la riservatezza cede davanti all'interesse pubblico preminente (personaggi pubblici in carica, fatti di rilevanza storica, condannati recidivi).",
+    "L'attività di indicizzazione del motore di ricerca costituisce un autonomo 'trattamento di dati personali': il motore è un titolare del trattamento autonomo.",
+    "La deindicizzazione non cancella la storia: l'archivio del giornale rimane intatto e consultabile — solo il link nei risultati di ricerca viene rimosso.",
+   ],
+   caso:[
+    "Google Spain (CGUE C-131/12, 2014): Costeja González chiede a Google la rimozione dei link a una notizia del 1998 su un suo pignoramento per vecchi debiti.",
+    "La CGUE: l'indicizzazione di Google costituisce 'trattamento di dati personali'; Google è 'titolare del trattamento'; esiste il diritto alla deindicizzazione.",
+    "Il limite: se l'interesse pubblico all'informazione prevale (es. personaggi pubblici, fatti di rilevanza storica), la deindicizzazione può essere negata.",
+   ]},
+  {n:63, t:"Art. 22 GDPR — diritto contro le decisioni automatizzate",
+   def:[
+    "Art. 22 GDPR: diritto a non essere sottoposto a una decisione basata unicamente su trattamento automatizzato (profilazione) che produca effetti giuridici significativi.",
+    "Il diritto si applica quando la decisione è presa da un algoritmo senza alcun intervento umano sostanziale — non quando l'umano semplicemente ratifica il risultato algoritmico.",
+    "Tre eccezioni tassative: necessità contrattuale, autorizzazione legale UE o dello Stato membro, consenso esplicito dell'interessato.",
+   ],
+   arg:[
+    "Anche quando un'eccezione opera, il titolare deve garantire: il diritto di ottenere l'intervento umano, di esprimere la propria opinione e di contestare la decisione.",
+    "La ratio: le valutazioni su capacità, caratteristiche e comportamenti degli individui non possono essere delegate in modo esclusivo a una macchina opaca.",
+    "Il rischio della discriminazione algoritmica: il sistema può incorporare i bias presenti nei dati di training, moltiplicandoli sistematicamente a danno di categorie vulnerabili.",
+   ],
+   caso:[
+    "Scoring creditizio algoritmico: rifiuto automatico di un mutuo sulla sola base di un punteggio AI → art. 22 impone revisione umana su richiesta del cliente.",
+    "Selezione automatica dei CV: il candidato scartato ha diritto a sapere perché e a contestare la decisione — l'algoritmo non può essere l'ultima parola.",
+    "Concessione di mutui tramite AI: l'istituto deve offrire revisione umana del diniego, con spiegazione intelligibile delle ragioni — non 'l'algoritmo ha deciso'.",
+   ]},
+  {n:64, t:"Art. 82 GDPR — ripartizione della prova — Caso Österreichische Post",
+   def:[
+    "Art. 82 GDPR: diritto al risarcimento del danno, materiale o immateriale, causato da una violazione del Regolamento — a carico del titolare o del responsabile del trattamento.",
+    "Regime di presunzione di colpa: l'interessato prova trattamento illecito + danno + nesso causale; il titolare si libera provando misure adeguate o caso fortuito.",
+    "Danno in re ipsa: ESCLUSO — la sola violazione del GDPR non crea automaticamente il diritto al risarcimento; occorre un danno effettivo e reale.",
+   ],
+   arg:[
+    "Non esiste una soglia minima di gravità del danno immateriale: anche un danno lieve — purché concretamente provato — è pienamente risarcibile.",
+    "La violazione del GDPR è un elemento che il giudice valuta per quantificare il danno, non per presumere la sua esistenza.",
+    "Il corollario pratico: il risarcimento è possibile ma non automatico — l'interessato deve dimostrare concretamente di aver subito un pregiudizio, anche minimo.",
+   ],
+   caso:[
+    "Österreichische Post (CGUE C-300/21, 2023): la Posta austriaca trattava dati degli utenti per dedurre affinità politiche a scopo di marketing diretto.",
+    "Il ricorrente chiedeva il risarcimento per il solo 'turbamento' causato dalla consapevolezza della profilazione politica — senza danni materiali dimostrabili.",
+    "La CGUE esclude il risarcimento automatico (no danno in re ipsa) ma conferma: qualsiasi danno immateriale, anche lieve, è risarcibile se concretamente provato.",
+   ]},
+  {n:65, t:"Trasferimento dati verso gli USA — Schrems I e II — Data Privacy Framework",
+   def:[
+    "GDPR art. 45: il trasferimento di dati verso Paesi terzi extra-UE richiede una 'decisione di adeguatezza' della Commissione — livello di protezione sostanzialmente equivalente a quello europeo.",
+    "Il problema strutturale con gli USA: FISA e EO 12333 consentono la sorveglianza di massa sui dati di cittadini non americani senza le garanzie giurisdizionali individuali richieste dalla Carta UE.",
+    "L'evoluzione: Safe Harbour (2000) → annullato Schrems I (2015) → Privacy Shield (2016) → annullato Schrems II (2020) → Data Privacy Framework (2022).",
+   ],
+   arg:[
+    "La ragione strutturale dell'incompatibilità: i programmi di sorveglianza USA (PRISM, UPSTREAM) raccolgono in massa dati di europei senza autorizzazione giudiziaria individuale.",
+    "Questo è incompatibile con i principi di proporzionalità e tutela giurisdizionale effettiva garantiti dalla Carta UE.",
+    "Il DPF 2022 introduce una 'Data Protection Review Court' — ma l'EDPB ne contesta l'indipendenza e l'effettività rispetto alle agenzie di intelligence USA.",
+   ],
+   caso:[
+    "Schrems I (CGUE C-362/14, 2015): Maximillian Schrems contesta il trasferimento dei suoi dati da Facebook Ireland agli USA — la CGUE invalida il Safe Harbour.",
+    "Schrems II (CGUE C-311/18, 2020): aggiornata la contestazione al Privacy Shield — la CGUE lo invalida: i programmi PRISM sono incompatibili con la Carta UE.",
+    "Il caso Schrems dimostra che un singolo militante per la privacy può abbattere accordi diplomatici bilionari — il GDPR fornisce la leva giuridica.",
+   ]},
+  {n:66, t:"Seconda ondata di enclosures sui dati grezzi — Data Act — Data Governance Act",
+   def:[
+    "La 'seconda ondata di enclosures': i dati grezzi non personali generati da macchinari IoT non sono coperti da copyright né da segreto commerciale — i fabbricanti usano la crittografia hardware per appropriarsene privatisticamente.",
+    "Il DGA (Reg. UE 2022/868): promuove la condivisione volontaria dei dati non personali — regola intermediari dati e codifica l'istituto dell'altruismo dei dati.",
+    "Il Data Act (Reg. UE 2023/2854): impone la condivisione obbligatoria — i dispositivi IoT devono essere progettati con il principio dell'accesso by design per l'utente.",
+   ],
+   arg:[
+    "La crittografia hardware come enclosure digitale: i fabbricanti recingono i dati grezzi con barriere tecnologiche, creando un monopolio artificiale su beni intrinsecamente non escludibili.",
+    "Il Data Act impone la portabilità in tempo reale dei dati IoT verso l'utente finale e verso servizi concorrenti (es. riparatori indipendenti).",
+    "Il DGA codifica l'altruismo dei dati: gli individui e le imprese possono autorizzare l'uso dei propri dati per finalità di interesse generale (ricerca scientifica, salute pubblica).",
+   ],
+   caso:[
+    "Il trattore John Deere: il contadino proprietario non può far riparare il proprio trattore da meccanici indipendenti — i dati diagnostici sono crittografati dal fabbricante.",
+    "Il Data Act mira a smantellare questa recinzione digitale: i dati generati dall'uso del macchinario appartengono (anche) all'utente, non solo al produttore.",
+    "L'analogia con le enclosures storiche del '700 è precisa: beni intrinsecamente collettivi (le terre comuni allora, i dati grezzi oggi) vengono privatizzati artificialmente dalla tecnologia.",
+   ]},
+ ]}
 ];
 
-// Render
 function render() {
   const main = document.getElementById('mainContent');
   main.innerHTML = '';
-  let totalTags = 0;
+  let totalP = 0;
 
   DATA.forEach(ch => {
-    const chDiv = document.createElement('div');
-    chDiv.className = 'chapter';
-    chDiv.setAttribute('data-cap', ch.cap);
-    chDiv.setAttribute('data-chapter', ch.cap);
+    const div = document.createElement('div');
+    div.className = 'chapter';
+    div.setAttribute('data-c', ch.c);
 
-    const qCount = ch.questions.length;
-    chDiv.innerHTML = `
-      <div class="chapter-header" onclick="toggleChapter(this)">
-        <span class="chapter-num">CAP. ${ch.cap}</span>
-        <span class="chapter-title">${ch.title}</span>
-        <span class="chapter-badge">${qCount} domande</span>
-        <span class="chapter-toggle">▾</span>
-      </div>
-      <div class="questions-grid" id="ch${ch.cap}grid"></div>`;
-    main.appendChild(chDiv);
+    const qs = ch.qs.map(q => {
+      const searchText = [q.t, ...q.def, ...q.arg, ...q.caso].join(' ').toLowerCase();
+      const defH = q.def.map(p => `<div class="phrase">${p}</div>`).join('');
+      const argH = q.arg.map(p => `<div class="phrase">${p}</div>`).join('');
+      const casoH = q.caso.map(p => `<div class="phrase">${p}</div>`).join('');
+      totalP += q.def.length + q.arg.length + q.caso.length;
 
-    const grid = chDiv.querySelector('.questions-grid');
-    ch.questions.forEach(q => {
-      const card = document.createElement('div');
-      card.className = 'q-card';
-      card.setAttribute('data-n', q.n);
-      card.setAttribute('data-search', (q.t + ' ' + q.def.join(' ') + ' ' + q.arg.join(' ') + ' ' + q.caso.join(' ')).toLowerCase());
-
-      const defTags = q.def.map(k => `<span class="kw-tag">${k}</span>`).join('');
-      const argTags = q.arg.map(k => `<span class="kw-tag">${k}</span>`).join('');
-      const casoTags = q.caso.map(k => `<span class="kw-tag">${k}</span>`).join('');
-      totalTags += q.def.length + q.arg.length + q.caso.length;
-
-      card.innerHTML = `
-        <div class="q-header" onclick="toggleCard(this.parentElement)">
-          <span class="q-num">${q.n}.</span>
-          <span class="q-title">${q.t}</span>
-          <span class="q-chevron">▶</span>
+      return `<div class="q-card" data-n="${q.n}" data-search="${searchText}">
+        <div class="q-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-n">${q.n}.</span>
+          <span class="q-t">${q.t}</span>
+          <span class="q-arr">▶</span>
         </div>
-        <div class="q-keywords">
-          <div class="kw-block def">
-            <span class="kw-label">Definizione</span>
-            <div class="kw-tags">${defTags}</div>
+        <div class="q-body">
+          <div class="block def">
+            <span class="block-label">Definizione</span>
+            <div class="phrases">${defH}</div>
           </div>
-          <div class="kw-block arg">
-            <span class="kw-label">Argomentazione</span>
-            <div class="kw-tags">${argTags}</div>
+          <div class="block arg">
+            <span class="block-label">Argomentazione</span>
+            <div class="phrases">${argH}</div>
           </div>
-          <div class="kw-block caso">
-            <span class="kw-label">Caso Giudiziario</span>
-            <div class="kw-tags">${casoTags}</div>
+          <div class="block caso">
+            <span class="block-label">Caso Giudiziario</span>
+            <div class="phrases">${casoH}</div>
           </div>
-        </div>`;
-      grid.appendChild(card);
-    });
+        </div>
+      </div>`;
+    }).join('');
+
+    div.innerHTML = `
+      <div class="ch-header" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="ch-num">CAP. ${ch.c}</span>
+        <span class="ch-title">${ch.title}</span>
+        <span class="ch-badge">${ch.qs.length} domande</span>
+        <span class="ch-arr">▾</span>
+      </div>
+      <div class="ch-body">${qs}</div>`;
+    main.appendChild(div);
   });
 
-  document.getElementById('totalTags').textContent = totalTags;
+  document.getElementById('totalPhrases').textContent = totalP;
 }
 
-function toggleCard(card) {
-  card.classList.toggle('open');
-}
-
-function toggleChapter(header) {
-  header.closest('.chapter').classList.toggle('collapsed');
-}
-
-// Search
-document.getElementById('searchInput').addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  let visible = 0;
-  document.querySelectorAll('.q-card').forEach(card => {
-    const match = !q || card.getAttribute('data-search').includes(q);
-    card.classList.toggle('hidden', !match);
-    if (match) visible++;
-    if (match && q) card.classList.add('open');
-  });
-  document.getElementById('visibleCount').textContent = visible;
-});
-
-// Expand/Collapse all
 document.getElementById('expandAll').addEventListener('click', () => {
   document.querySelectorAll('.q-card:not(.hidden)').forEach(c => c.classList.add('open'));
   document.querySelectorAll('.chapter').forEach(c => c.classList.remove('collapsed'));
@@ -782,35 +1407,41 @@ document.getElementById('collapseAll').addEventListener('click', () => {
   document.querySelectorAll('.chapter').forEach(c => c.classList.add('collapsed'));
 });
 
-// Test mode
-let testActive = false;
-document.getElementById('testMode').addEventListener('click', function() {
-  testActive = !testActive;
-  document.body.classList.toggle('test-mode', testActive);
-  this.classList.toggle('active', testActive);
-  this.textContent = testActive ? '✅ ESCI DAL TEST' : '🎯 SELF-TEST';
-  document.getElementById('testStats').style.display = testActive ? 'block' : 'none';
-  if (!testActive) {
-    document.querySelectorAll('.kw-tag').forEach(t => t.classList.remove('revealed'));
-    updateRevealedCount();
+let hideActive = false;
+document.getElementById('hideMode').addEventListener('click', function() {
+  hideActive = !hideActive;
+  document.body.classList.toggle('hide-mode', hideActive);
+  this.classList.toggle('on', hideActive);
+  this.textContent = hideActive ? '👁 MOSTRA TUTTO' : '🙈 NASCONDI FRASI';
+  document.getElementById('hideStats').style.display = hideActive ? 'block' : 'none';
+  if (!hideActive) {
+    document.querySelectorAll('.phrase').forEach(p => p.classList.remove('shown'));
+    document.getElementById('revealedCount').textContent = 0;
+    document.getElementById('progressFill').style.width = '0%';
   }
 });
 
-document.addEventListener('click', function(e) {
-  if (testActive && e.target.classList.contains('kw-tag')) {
-    e.target.classList.toggle('revealed');
-    updateRevealedCount();
+document.addEventListener('click', e => {
+  if (hideActive && e.target.classList.contains('phrase')) {
+    e.target.classList.toggle('shown');
+    const revealed = document.querySelectorAll('.phrase.shown').length;
+    const total = parseInt(document.getElementById('totalPhrases').textContent);
+    document.getElementById('revealedCount').textContent = revealed;
+    document.getElementById('progressFill').style.width = (revealed / total * 100) + '%';
   }
 });
 
-function updateRevealedCount() {
-  const revealed = document.querySelectorAll('.kw-tag.revealed').length;
-  document.getElementById('revealedCount').textContent = revealed;
-  const total = parseInt(document.getElementById('totalTags').textContent);
-  document.getElementById('progressFill').style.width = (revealed/total*100) + '%';
-}
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  let v = 0;
+  document.querySelectorAll('.q-card').forEach(c => {
+    const match = !q || c.getAttribute('data-search').includes(q);
+    c.classList.toggle('hidden', !match);
+    if (match) { v++; if (q) c.classList.add('open'); }
+  });
+  document.getElementById('visibleCount').textContent = v;
+});
 
-// Init
 render();
 </script>
 </body>
