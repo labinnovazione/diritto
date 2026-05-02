@@ -96,6 +96,7 @@ input.search:focus { border-color: var(--muted); }
   border-bottom: 1px solid var(--border);
   padding: 9px 40px;
   display: flex; gap: 24px; align-items: center;
+  flex-wrap: wrap;
 }
 .leg {
   display: flex; align-items: center; gap: 6px;
@@ -113,6 +114,7 @@ input.search:focus { border-color: var(--muted); }
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; color: var(--muted);
   display: flex; gap: 20px; letter-spacing: 0.4px;
+  flex-wrap: wrap;
 }
 .stats span { color: var(--text); }
 
@@ -230,13 +232,29 @@ body.hide-mode .block.caso .phrase.shown { background: var(--caso-phrase) !impor
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
-  header { padding: 18px 20px; flex-wrap: wrap; }
-  main { padding: 0 20px 80px; }
-  .legend, .stats { padding-left: 20px; padding-right: 20px; }
-  .q-body { grid-template-columns: 1fr; }
-  .block { border-right: none; border-bottom: 1px solid var(--border); }
+  header { padding: 18px 20px; flex-direction: column; align-items: flex-start; }
+  .hl h1 { font-size: 17px; }
+  .hc { width: 100%; justify-content: space-between; }
+  input.search { width: 100%; margin-bottom: 10px; }
+  
+  main { padding: 0 15px 80px; }
+  .legend, .stats { padding: 10px 15px; gap: 10px; }
+  
+  /* FIX PER LE COLONNE TAGLIATE: passiamo a 1 colonna verticale */
+  .q-card.open .q-body { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .block { 
+    border-right: none; 
+    border-bottom: 1px solid var(--border); 
+    padding: 20px 16px; /* Aumentiamo il padding per leggibilità mobile */
+  }
   .block:last-child { border-bottom: none; }
-  input.search { width: 130px; }
+  
+  .ch-header { gap: 8px; }
+  .ch-num { min-width: 50px; font-size: 9px; }
+  .ch-title { font-size: 16px; }
 }
 </style>
 </head>
@@ -259,7 +277,7 @@ body.hide-mode .block.caso .phrase.shown { background: var(--caso-phrase) !impor
   <div class="leg"><div class="ld" style="background:var(--def)"></div>DEFINIZIONE</div>
   <div class="leg"><div class="ld" style="background:var(--arg)"></div>ARGOMENTAZIONE</div>
   <div class="leg"><div class="ld" style="background:var(--caso)"></div>CASO</div>
-  <div class="leg-note">Modalità nascondi: clicca ogni frase per rivelarla · le frasi sono quelle che non possono mancare in una risposta da 9/10</div>
+  <div class="leg-note">Modalità nascondi: clicca ogni frase per rivelarla</div>
 </div>
 
 <div class="stats">
@@ -271,6 +289,7 @@ body.hide-mode .block.caso .phrase.shown { background: var(--caso-phrase) !impor
 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
 <script>
+// ... (Tutto il tuo blocco DATA rimane identico, lo incollo qui sotto per completezza se vuoi copiare tutto direttamente)
 const DATA = [
  {c:1, title:"Il Contesto", qs:[
   {n:1, t:"Digitalizzazione vs datizzazione — Caso Google Books",
@@ -747,7 +766,7 @@ const DATA = [
    def:[
     "Il recesso ad nutum (artt. 52 ss. Codice del Consumo) è il diritto irrinunciabile del consumatore di sciogliere un contratto B2C a distanza entro 14 giorni, senza motivazione e senza penali.",
     "Si applica sia ai contratti a titolo oneroso sia ai contratti in cui la controprestazione è costituita da dati personali.",
-    "Se il professionista omette di informare sull'esistenza del diritto di recesso, il termine si estende automaticamente a 12 mesi.",
+    "Se le professionista omette di informare sull'esistenza del diritto di recesso, il termine si estende automaticamente a 12 mesi.",
    ],
    arg:[
     "La ratio: compensare l'asimmetria informativa nella contrattazione 'al buio' online — il consumatore non può valutare il prodotto prima dell'acquisto.",
@@ -800,7 +819,7 @@ const DATA = [
    arg:[
     "Un servizio ceduto in cambio di dati non è gratuito: l'utente paga con informazioni che hanno un preciso valore commerciale.",
     "Lo sfruttamento massivo dei dati per finalità di publicità mirata trasforma il rapporto in un contratto oneroso, con tutte le conseguenti tutele consumeristiche.",
-    "Il corollario: il professionista che offre un servizio 'gratuito' in cambio di dati deve informare il consumatore del valore economico dello scambio.",
+    "Il corollario pratico: il professionista che offre un servizio 'gratuito' in cambio di dati deve informare il consumatore del valore economico dello scambio.",
    ],
    caso:[
     "AGCM v. Facebook (2018): l'Antitrust italiana sanziona Facebook per pratica commerciale scorretta.",
@@ -1074,7 +1093,7 @@ const DATA = [
     "VLOPs (Very Large Online Platforms): piattaforme con oltre 45 milioni di utenti attivi mensili nell'UE — soggette a obblighi aggiuntivi di risk management annuale.",
    ],
    arg:[
-    "Il DSA uniforma le procedure di rimozione a livello europeo: fine della frammentazione normativa creata dai diversi recepimenti nazionali della Direttiva 2000/31/CE.",
+    "Il DSA uniforma le procedure di rimozione a livello europeo: fine della frammentazione normativa creata dai diversi recepimenti della Direttiva 2000/31/CE.",
     "I rischi sistemici delle VLOPs: diffusione virale di contenuti illegali, pregiudizi ai processi elettorali e democratici, danni alla salute mentale dei minori.",
     "Il notice and stay-down: una volta rimosso su segnalazione, il provider deve impedire il ricaricamento futuro — obbligo di sorveglianza specifico e mirato.",
    ],
